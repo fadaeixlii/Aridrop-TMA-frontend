@@ -7,6 +7,31 @@ import RoadMapItem from "./components/RoadMapItem";
 
 function App() {
   const [activeTab, setActiveTab] = useState("Home");
+  const [userId, setUserId] = useState(null);
+  const [userIdd, setUserIdd] = useState(null);
+  const [tgg, setTgg] = useState(null);
+
+  useEffect(() => {
+    // Check if the Telegram WebApp SDK is loaded
+    if (window.Telegram.WebApp) {
+      const tg = window.Telegram.WebApp;
+      tg.ready();
+
+      // Get user information
+      const initDataUnsafe = tg.initDataUnsafe;
+      if (tg) setTgg(JSON.stringify(tg));
+      const user = initDataUnsafe.user;
+
+      if (initDataUnsafe) {
+        setUserId(JSON.stringify(initDataUnsafe));
+      }
+      if (user) {
+        setUserIdd(JSON.stringify(user));
+      }
+    } else {
+      console.error("Telegram Web App SDK not found");
+    }
+  }, []);
 
   const renderPage = {
     Home: (
@@ -26,6 +51,7 @@ function App() {
         {[1, 2, 3, 4].map((number) => (
           <TaskItem key={number} />
         ))}
+        {userId ? <p>Your Telegram User ID: {userId}</p> : <p>Loading...</p>}
       </div>
     ),
     Missions: (
