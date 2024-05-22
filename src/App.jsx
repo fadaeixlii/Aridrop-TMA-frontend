@@ -51,9 +51,27 @@ function App() {
         {[1, 2, 3, 4].map((number) => (
           <TaskItem key={number} />
         ))}
-        {userId ? <p>Your Telegram User ID: {userId}</p> : <p>Loading...</p>}
-        {userIdd ? <p>Your Telegram User idd: {userIdd}</p> : <p>Loading...</p>}
-        {tgg ? <p>Your Telegram User tgg: {tgg}</p> : <p>Loading...</p>}
+        {userId ? (
+          <p className="w-full text-wrap text-white">
+            Your Telegram User ID: {userId}
+          </p>
+        ) : (
+          <p>Loading...</p>
+        )}
+        {userIdd ? (
+          <p className="w-full text-wrap text-white">
+            Your Telegram User idd: {userIdd}
+          </p>
+        ) : (
+          <p>Loading...</p>
+        )}
+        {tgg ? (
+          <p className="w-full text-wrap text-white">
+            Your Telegram User tgg: {tgg}
+          </p>
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     ),
     Missions: (
