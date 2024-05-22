@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BottomBar from "./components/BottomBar";
 import ClaimBox from "./components/ClaimBox";
 import ReferralAndClub from "./components/ReferralAndClub";
@@ -52,6 +52,8 @@ function App() {
           <TaskItem key={number} />
         ))}
         {userId ? <p>Your Telegram User ID: {userId}</p> : <p>Loading...</p>}
+        {userIdd ? <p>Your Telegram User idd: {userIdd}</p> : <p>Loading...</p>}
+        {tgg ? <p>Your Telegram User tgg: {tgg}</p> : <p>Loading...</p>}
       </div>
     ),
     Missions: (
