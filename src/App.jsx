@@ -4,39 +4,28 @@ import ClaimBox from "./components/ClaimBox";
 import ReferralAndClub from "./components/ReferralAndClub";
 import TaskItem from "./components/TaskItem";
 import RoadMapItem from "./components/RoadMapItem";
+import WebApp from "@twa-dev/sdk";
+import { useTelegramStore } from "./Store/TelegramStore";
 
 function App() {
   const [activeTab, setActiveTab] = useState("Home");
-  const [userId, setUserId] = useState(null);
-  const [userIdd, setUserIdd] = useState(null);
-  const [tgg, setTgg] = useState(null);
-
+  const { userInfo, setUserInfo } = useTelegramStore();
   useEffect(() => {
     // Check if the Telegram WebApp SDK is loaded
-    if (window.Telegram.WebApp) {
-      const tg = window.Telegram.WebApp;
+    if (WebApp) {
+      const tg = WebApp;
       tg.ready();
       tg.expand();
       if (tg.MainButton) {
         tg.MainButton.hide();
       }
 
-      // Hide the web app header if it exists
       if (tg.BackButton) {
         tg.BackButton.hide();
       }
-      // tg.setHeaderColor("transparent");
 
-      const initDataUnsafe = tg.initDataUnsafe;
-      if (tg) setTgg(JSON.stringify(tg));
-      const user = initDataUnsafe.user;
-
-      if (initDataUnsafe) {
-        setUserId(JSON.stringify(initDataUnsafe));
-      }
-      if (user) {
-        setUserIdd(JSON.stringify(user));
-      }
+      const user = tg.initDataUnsafe?.user;
+      setUserInfo(user);
     } else {
       console.error("Telegram Web App SDK not found");
     }
@@ -60,27 +49,7 @@ function App() {
         {[1, 2, 3, 4].map((number) => (
           <TaskItem key={number} />
         ))}
-        {userId ? (
-          <p className="w-full text-wrap text-white">
-            Your Telegram User ID: {userId}
-          </p>
-        ) : (
-          <p>Loading...</p>
-        )}
-        {userIdd ? (
-          <p className="w-full text-wrap text-white">
-            Your Telegram User idd: {userIdd}
-          </p>
-        ) : (
-          <p>Loading...</p>
-        )}
-        {tgg ? (
-          <p className="w-full text-wrap text-white">
-            Your Telegram User tgg: {tgg}
-          </p>
-        ) : (
-          <p>Loading...</p>
-        )}
+        {userInfo ? JSON.stringify(userInfo) : null}
       </div>
     ),
     Missions: (
