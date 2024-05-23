@@ -17,7 +17,14 @@ function App() {
       const tg = window.Telegram.WebApp;
       tg.ready();
       tg.expand();
-      tg.MainButton.hide();
+      if (tg.MainButton) {
+        tg.MainButton.hide();
+      }
+
+      // Hide the web app header if it exists
+      if (tg.BackButton) {
+        tg.BackButton.hide();
+      }
       // tg.setHeaderColor("transparent");
 
       const initDataUnsafe = tg.initDataUnsafe;
