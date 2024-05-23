@@ -17,6 +17,9 @@ function App() {
       const tg = window.Telegram.WebApp;
       tg.ready();
       tg.expand();
+      tg.MainButton.hide();
+      tg.setHeaderColor("transparent");
+
       const initDataUnsafe = tg.initDataUnsafe;
       if (tg) setTgg(JSON.stringify(tg));
       const user = initDataUnsafe.user;
