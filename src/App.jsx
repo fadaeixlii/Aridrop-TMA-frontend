@@ -18,12 +18,16 @@ function App() {
       tg.ready();
       tg.expand();
       if (tg.MainButton) {
+        tg.MainButton.disable();
         tg.MainButton.hide();
+        tg.MainButton.hideProgress();
       }
 
       // Hide the web app header if it exists
       if (tg.BackButton) {
+        tg.BackButton.disable();
         tg.BackButton.hide();
+        tg.BackButton.hideProgress();
       }
       // tg.setHeaderColor("transparent");
 
