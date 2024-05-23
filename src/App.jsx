@@ -18,7 +18,7 @@ function App() {
       tg.ready();
       tg.expand();
       tg.MainButton.hide();
-      tg.setHeaderColor("transparent");
+      // tg.setHeaderColor("transparent");
 
       const initDataUnsafe = tg.initDataUnsafe;
       if (tg) setTgg(JSON.stringify(tg));
