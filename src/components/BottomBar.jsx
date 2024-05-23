@@ -2,7 +2,7 @@ import { PiCircuitryLight, PiGiftLight, PiHouseLight } from "react-icons/pi";
 import { twMerge } from "tailwind-merge";
 export default function BottomBar({ activeTab, setActiveTab }) {
   return (
-    <div className="bg-[#222222] px-8 py-4 rounded-full flex items-center  w-[90%] m-auto fixed bottom-7 left-1/2 -translate-x-1/2 border border-[#3D3D3D] max-w-[380px] ">
+    <div className="bg-[#222222] px-6 py-3 rounded-full flex items-center  w-[90%] m-auto fixed bottom-7 left-1/2 -translate-x-1/2 border border-[#3D3D3D] max-w-[380px] ">
       <div
         onClick={() => setActiveTab("Home")}
         className={twMerge(
@@ -10,7 +10,7 @@ export default function BottomBar({ activeTab, setActiveTab }) {
           activeTab === "Home" && "text-[#AFEF28]"
         )}
       >
-        <PiHouseLight className="size-7" />
+        <PiHouseLight className="size-6" />
         Home
       </div>
       <div
@@ -20,7 +20,7 @@ export default function BottomBar({ activeTab, setActiveTab }) {
           activeTab === "Missions" && "text-[#AFEF28]"
         )}
       >
-        <PiGiftLight className="size-7" />
+        <PiGiftLight className="size-6" />
         Missions
       </div>
       <div
@@ -30,7 +30,7 @@ export default function BottomBar({ activeTab, setActiveTab }) {
           activeTab === "Road Map" && "text-[#AFEF28]"
         )}
       >
-        <PiCircuitryLight className="size-7" />
+        <PiCircuitryLight className="size-6" />
         Road Map
       </div>
     </div>
