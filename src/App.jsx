@@ -16,7 +16,8 @@ function App() {
     if (window.Telegram.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
-
+      tg.expand();
+      tg.setHeaderColor("transparent");
       // Get user information
       const initDataUnsafe = tg.initDataUnsafe;
       if (tg) setTgg(JSON.stringify(tg));
