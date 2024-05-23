@@ -6,6 +6,7 @@ import TaskItem from "./components/TaskItem";
 import RoadMapItem from "./components/RoadMapItem";
 import WebApp from "@twa-dev/sdk";
 import { useTelegramStore } from "./Store/TelegramStore";
+import Loading from "./components/Loading/Loading";
 
 function App() {
   const [activeTab, setActiveTab] = useState("Home");
@@ -74,11 +75,15 @@ function App() {
 
   return (
     <div className="w-full p-0  bg-[#1D1D1E] flex items-center justify-center overflow-scroll  overflow-x-hidden ">
-      <div className="max-w-[450px] relative h-[100vh] p-3  w-full ">
-        {renderPage[activeTab]}
-        <div className="h-44"></div>
-        <BottomBar activeTab={activeTab} setActiveTab={setActiveTab} />
-      </div>
+      {userInfo ? (
+        <div className="max-w-[450px] relative h-[100vh] p-3  w-full ">
+          {renderPage[activeTab]}
+          <div className="h-44"></div>
+          <BottomBar activeTab={activeTab} setActiveTab={setActiveTab} />
+        </div>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }
