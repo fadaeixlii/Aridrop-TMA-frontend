@@ -96,7 +96,7 @@ function App() {
 
   return (
     <div className="w-full p-0  bg-[#1D1D1E] flex items-center justify-center overflow-scroll  overflow-x-hidden ">
-      <div className="max-w-[450px] relative h-[100dvh] p-3  w-full ">
+      <div className="max-w-[450px] relative h-[100vh] p-3  w-full ">
         {renderPage[activeTab]}
         <div className="h-44"></div>
         <BottomBar activeTab={activeTab} setActiveTab={setActiveTab} />
