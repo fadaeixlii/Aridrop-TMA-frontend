@@ -5,14 +5,13 @@ import {
   PiPipeWrenchLight,
   PiSpeedometerLight,
 } from "react-icons/pi";
-import AnimatedNumbers from "react-animated-numbers";
-import { FaGem } from "react-icons/fa";
 
 import CoinIcon from "../assets/CoinIcon.svg";
 import Button from "./Button";
+import AnimatedCounter from "./AnimatedNumber";
 
 export default function ClaimBox() {
-  const [perHour, setPerHour] = useState(0.05);
+  const [perHour, setPerHour] = useState(15);
   const [storedScore, setStoredScore] = useState(10054620);
   const [currentScore, setCurrentScore] = useState(561234);
   return (
@@ -27,12 +26,9 @@ export default function ClaimBox() {
         <span className="bg-[#789E2A]/20 flex justify-center items-center p-1 rounded-lg">
           <PiHandWithdrawLight className="text-[#49610D] size-6" />
         </span>
-        <AnimatedNumbers
-          animateToNumber={perHour}
-          fontStyle={{
-            fontWeight: "bold",
-          }}
-        />
+        <div className="font-bold">
+          <AnimatedCounter from={perHour / 5} to={perHour} />
+        </div>
         IPAL
       </div>
 
@@ -45,24 +41,15 @@ export default function ClaimBox() {
               <PiCoinsLight className="text-[#49610D] size-6" />
             </span>
             Total
-            <AnimatedNumbers
-              includeComma
-              animateToNumber={storedScore}
-              fontStyle={{
-                fontWeight: "bold",
-                fontSize: "1.2rem",
-              }}
-            />
+            <div className="font-bold">
+              <AnimatedCounter from={storedScore / 5} to={storedScore} />
+            </div>
           </div>
           <div className="flex items-center gap-2">
-            <AnimatedNumbers
-              includeComma
-              animateToNumber={currentScore}
-              fontStyle={{
-                fontWeight: "bold",
-                fontSize: "1.7rem",
-              }}
-            />
+            <div className="font-bold">
+              <AnimatedCounter from={currentScore / 5} to={currentScore} />
+            </div>
+
             <span className="font-semibold">OPAL</span>
           </div>
         </div>

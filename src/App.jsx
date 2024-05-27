@@ -6,7 +6,7 @@ import TaskItem from "./components/TaskItem";
 import RoadMapItem from "./components/RoadMapItem";
 import WebApp from "@twa-dev/sdk";
 import { useTelegramStore } from "./Store/TelegramStore";
-import Loading from "./components/Loading/Loading";
+import Data from "./mockData.json";
 
 function App() {
   const [activeTab, setActiveTab] = useState("Home");
@@ -25,7 +25,7 @@ function App() {
         tg.BackButton.hide();
       }
 
-      const user = tg.initDataUnsafe?.user;
+      const user = tg.initDataUnsafe?.user ?? Data;
       setUserInfo(user);
     } else {
       console.error("Telegram Web App SDK not found");
@@ -75,15 +75,11 @@ function App() {
 
   return (
     <div className="w-full p-0  bg-[#1D1D1E] flex items-center justify-center overflow-scroll  overflow-x-hidden ">
-      {userInfo ? (
-        <div className="max-w-[450px] relative h-[100vh] p-3  w-full ">
-          {renderPage[activeTab]}
-          <div className="h-44"></div>
-          <BottomBar activeTab={activeTab} setActiveTab={setActiveTab} />
-        </div>
-      ) : (
-        <Loading />
-      )}
+      <div className="max-w-[450px] relative h-[100vh] p-3  w-full ">
+        {renderPage[activeTab]}
+        <div className="h-44"></div>
+        <BottomBar activeTab={activeTab} setActiveTab={setActiveTab} />
+      </div>
     </div>
   );
 }
