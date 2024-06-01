@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create an instance of axios
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:7001/", // Replace with your API base URL
+  baseURL: "https://api.airdrop.tma.biten.ir/", // Replace with your API base URL
   timeout: 10000, // Set a timeout limit
   headers: {
     "Content-Type": "application/json",
