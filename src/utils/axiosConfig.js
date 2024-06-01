@@ -2,11 +2,13 @@ import axios from "axios";
 
 // Create an instance of axios
 const axiosInstance = axios.create({
-  baseURL: "https://api.example.com", // Replace with your API base URL
+  baseURL: "http://localhost:7001/", // Replace with your API base URL
   timeout: 10000, // Set a timeout limit
   headers: {
     "Content-Type": "application/json",
     // Add any custom headers if needed
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
   },
 });
 

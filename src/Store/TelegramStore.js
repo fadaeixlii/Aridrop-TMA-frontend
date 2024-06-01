@@ -1,23 +1,46 @@
 import { create } from "zustand";
+import api from "../utils/axiosConfig";
 
 export const useTelegramStore = create((set) => ({
-  userInfo: null,
-  setUserInfo: (payload) => set(() => ({ userInfo: payload })),
+  telegramUserInfo: null,
+  setTelegramUserInfo: (payload) => set(() => ({ telegramUserInfo: payload })),
 }));
 
-const userUserId = create((set) => ({
+export const useUserId = create((set) => ({
   userId: null,
   loading: false,
 
-  fetchData: async () => {
+  fetchData: async (telegramId) => {
     set({ loading: true, error: null });
 
     try {
-      const response = await fetch("https://api.example.com/data");
-      const result = await response.json();
-      set({ data: result, loading: false });
+      const { data } = await api.get(`/user/telegram/${telegramId}`);
+      set({ userId: data.data, loading: false });
     } catch (error) {
       set({ error: "Failed to fetch data", loading: false });
     }
+  },
+}));
+export const useUserInfo = create((set) => ({
+  userInfo: null,
+  loading: false,
+
+  fetchData: async (userId) => {
+    set({ loading: true, error: null });
+
+    try {
+      const { data } = await api.get(`/user/${userId}`);
+      set({ userInfo: data.data, loading: false });
+    } catch (error) {
+      set({ error: "Failed to fetch data", loading: false });
+    }
+  },
+  claim: () => {
+    set((state) => ({
+      userInfo: {
+        ...state.userInfo,
+        storedScore: state.userInfo.storedScore + state.userInfo.maxScore,
+      },
+    }));
   },
 }));
