@@ -15,6 +15,7 @@ import RoadMapPage from "./components/Page/RoadMapPage";
 import ReferralPage from "./components/Page/ReferralPage";
 import FullScreenLoading from "./components/Loading/FullScreenLoading";
 import { Toaster } from "react-hot-toast";
+import InvestingPage from "./components/Page/InvestingPage";
 function App() {
   const [activeTab, setActiveTab] = useState("Home");
   const { setTelegramUserInfo } = useTelegramStore();
@@ -61,6 +62,7 @@ function App() {
     "Road Map": <RoadMapPage />,
     Boost: <BoostPage />,
     Referral: <ReferralPage />,
+    Investing: <InvestingPage />,
   };
 
   if (!userInfo)
