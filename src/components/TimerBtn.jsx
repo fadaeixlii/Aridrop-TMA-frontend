@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import Button from "./Button";
+import Button from "./common/Button";
 import { PiClockAfternoonLight, PiPipeWrenchLight } from "react-icons/pi";
 import { useUserId, useUserInfo } from "../Store/TelegramStore";
 import api from "../utils/axiosConfig";
@@ -76,30 +76,41 @@ const TimerButton = () => {
   }, [countdown]);
 
   return (
-    <Button
-      loading={Loading}
-      disabled={isButtonDisabled}
-      onClick={fetchDate}
+    <div
       className={twMerge(
-        "flex items-center gap-2 !w-1/2 justify-center py-4  rounded-2xl",
-        isButtonDisabled ? "!bg-[#1D1D1E]/30 !text-[#AFEF28]" : "!bg-[#1D1D1E]"
+        "p-[2px] !w-1/2    !rounded-2xl   bg-[length:400%_400%]",
+        isButtonDisabled
+          ? ""
+          : " bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 animate-border    "
       )}
     >
-      {isButtonDisabled ? (
-        <span className="font-mono flex items-center gap-2">
-          <PiClockAfternoonLight className="size-5" />
-          {` ${Math.floor(countdown / 60)
-            .toString()
-            .padStart(2, "0")}:${(countdown % 60)
-            .toString()
-            .padStart(2, "0")} m to fill`}
-        </span>
-      ) : (
-        <>
-          <PiPipeWrenchLight className="size-5 " /> {"Claim"}
-        </>
-      )}
-    </Button>
+      <Button
+        loading={Loading}
+        disabled={isButtonDisabled}
+        onClick={fetchDate}
+        className={twMerge(
+          "flex items-center gap-2 !w-full   justify-center py-4  !rounded-2xl mb-0  ",
+          isButtonDisabled
+            ? "!bg-[#1D1D1E]/50 !text-[#AFEF28]"
+            : "!bg-[#1D1D1E] "
+        )}
+      >
+        {isButtonDisabled ? (
+          <span className="font-mono flex items-center gap-2">
+            <PiClockAfternoonLight className="size-5" />
+            {` ${Math.floor(countdown / 60)
+              .toString()
+              .padStart(2, "0")}:${(countdown % 60)
+              .toString()
+              .padStart(2, "0")} fill`}
+          </span>
+        ) : (
+          <>
+            <PiPipeWrenchLight className="size-5 " /> {"Claim"}
+          </>
+        )}
+      </Button>
+    </div>
   );
 };
 

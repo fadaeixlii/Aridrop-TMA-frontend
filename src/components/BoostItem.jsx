@@ -1,4 +1,3 @@
-import React from "react";
 import { FaArrowCircleRight } from "react-icons/fa";
 export default function BoostItem({
   img,

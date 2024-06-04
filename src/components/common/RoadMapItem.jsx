@@ -1,4 +1,4 @@
-import roadMapImage from "../assets/RoadMap.png";
+import roadMapImage from "./../../assets/RoadMap.png";
 export default function RoadMapItem() {
   return (
     <div className="rounded-2xl bg-[#333333] border border-[#3D3D3D]  flex flex-col  items-start justify-between p-4 gap-4 text-white text-lg  ">

@@ -1,14 +1,15 @@
 import { useState } from "react";
-import CoinIcon from "../assets/CoinIcon.svg";
-import AnimatedCounter from "./AnimatedNumber";
-import { useUserId, useUserInfo } from "../Store/TelegramStore";
-import BoostItem from "./BoostItem";
-import Missile from "./../assets/Missile.png";
-import bank from "./../assets/Bank.png";
-import BottomModal from "./BottonModal";
+import CoinIcon from "./../../assets/CoinIcon.svg";
+import AnimatedCounter from "../common/AnimatedNumber";
+import { useUserId, useUserInfo } from "../../Store/TelegramStore";
+import BoostItem from "../BoostItem";
+import Missile from "./.././../assets/Missile.png";
+import bank from "./.././../assets/Bank.png";
+import BottomModal from "../common/BottonModal";
 import { FaArrowCircleRight } from "react-icons/fa";
-import api from "../utils/axiosConfig";
-import Button from "./Button";
+import api from "../../utils/axiosConfig";
+import Button from "../common/Button";
+import { notifySuccess } from "../../utils/constant";
 export default function BoostPage() {
   const { userInfo, fetchData } = useUserInfo();
   const { userId } = useUserId();
@@ -34,6 +35,7 @@ export default function BoostPage() {
       console.log(response);
       setShowModal(false);
       fetchData(userId.userId);
+      notifySuccess("Boost Purchased 👻");
     } catch (error) {
       console.log(error);
     } finally {
@@ -65,13 +67,11 @@ export default function BoostPage() {
           <div>
             <span>{userInfo.timeLimit} Minute </span>
             {" /"}
-            <span className="text-[#AFEF28]"> -0.25 minute</span>
+            <span className="number"> -0.25 minute</span>
             <p>
               {" "}
               Cost:{" "}
-              <span className="text-[#AFEF28]">
-                {userInfo.userTimeLimitPrice} OPL
-              </span>
+              <span className="number">{userInfo.userTimeLimitPrice} OPL</span>
             </p>
           </div>
         }
@@ -97,13 +97,11 @@ export default function BoostPage() {
           <div>
             <span>{userInfo.maxScore} OPL </span>
             {" /"}
-            <span className="text-[#AFEF28]"> +5 OPL</span>
+            <span className="number"> +5 OPL</span>
             <p>
               {" "}
               Cost:{" "}
-              <span className="text-[#AFEF28]">
-                {userInfo.userMaxScorePrice} OPL
-              </span>
+              <span className="number">{userInfo.userMaxScorePrice} OPL</span>
             </p>
           </div>
         }
@@ -131,9 +129,7 @@ export default function BoostPage() {
           </span>
           <p>
             Cost:{" "}
-            <span className="text-[#AFEF28]">
-              {userInfo.userMaxScorePrice} OPL
-            </span>
+            <span className="number">{userInfo.userMaxScorePrice} OPL</span>
           </p>
           <span className="text-lg flex items-center gap-2">
             {boostConfig.currentValue}

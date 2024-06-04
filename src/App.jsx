@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
 import BottomBar from "./components/BottomBar";
-import ClaimBox from "./components/ClaimBox";
-import ReferralAndClub from "./components/ReferralAndClub";
-import TaskItem from "./components/TaskItem";
-import RoadMapItem from "./components/RoadMapItem";
 import WebApp from "@twa-dev/sdk";
 import {
   useTelegramStore,
@@ -11,18 +7,28 @@ import {
   useUserInfo,
 } from "./Store/TelegramStore";
 import Data from "./mockData.json";
-import BoostPage from "./components/BoostPage";
-
+import BoostPage from "./components/Page/BoostPage";
+import { useTaskStore } from "./Store/TaskStore";
+import HomePage from "./components/Page/HomePage";
+import MissionsPage from "./components/Page/MissionsPage";
+import RoadMapPage from "./components/Page/RoadMapPage";
+import ReferralPage from "./components/Page/ReferralPage";
+import FullScreenLoading from "./components/Loading/FullScreenLoading";
+import { Toaster } from "react-hot-toast";
 function App() {
   const [activeTab, setActiveTab] = useState("Home");
-  const { telegramUserInfo, setTelegramUserInfo } = useTelegramStore();
+  const { setTelegramUserInfo } = useTelegramStore();
   const { userId, fetchData: fetchUserId } = useUserId();
   const { userInfo, fetchData: fetchUserInfo } = useUserInfo();
+  const { fetchData: fetchTasks } = useTaskStore();
   useEffect(() => {
     fetchInitData();
   }, []);
   useEffect(() => {
-    if (userId) fetchUserInfo(userId.userId);
+    if (userId) {
+      fetchUserInfo(userId.userId);
+      fetchTasks(userId.userId);
+    }
   }, [userId]);
 
   const fetchInitData = async () => {
@@ -50,51 +56,24 @@ function App() {
   };
 
   const renderPage = {
-    Home: (
-      <div className="flex flex-col gap-5 w-full">
-        <ClaimBox setActiveTab={setActiveTab} />
-        <ReferralAndClub setActiveTab={setActiveTab} />
-        {/* <div className="text-white text-lg flex justify-between items-center">
-          <span>Start Missions Now!</span>
-          <span
-            onClick={() => {
-              setActiveTab("Missions");
-            }}
-          >
-            See All
-          </span>
-        </div> */}
-        {/* {[1, 2, 3, 4].map((number) => (
-          <TaskItem key={number} />
-        ))} */}
-        {/* {telegramUserInfo ? JSON.stringify(telegramUserInfo) : null} */}
-      </div>
-    ),
-    Missions: (
-      <div className="flex flex-col gap-3 w-full">
-        <div className="text-white text-lg flex justify-between items-center w-full">
-          <span>Missions Page</span>
-        </div>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => (
-          <TaskItem key={number} />
-        ))}
-      </div>
-    ),
-    "Road Map": (
-      <div className="flex flex-col gap-3 w-full">
-        <div className="text-white text-lg flex justify-between items-center">
-          <span>Road Map Page</span>
-        </div>
-        <RoadMapItem />
-      </div>
-    ),
+    Home: <HomePage setActiveTab={setActiveTab} />,
+    Missions: <MissionsPage />,
+    "Road Map": <RoadMapPage />,
     Boost: <BoostPage />,
+    Referral: <ReferralPage />,
   };
 
-  if (!userInfo) return null;
+  if (!userInfo)
+    return (
+      <>
+        <Toaster />
+        <FullScreenLoading />;
+      </>
+    );
 
   return (
     <div className="w-full p-0  bg-[#1D1D1E] flex items-center justify-center overflow-scroll  overflow-x-hidden ">
+      <Toaster />
       <div className="max-w-[450px] relative h-[100vh] p-3  w-full ">
         {renderPage[activeTab]}
         <div className="h-44"></div>
