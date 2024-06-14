@@ -5,7 +5,7 @@ import { useUserId, useUserInfo } from "../../Store/TelegramStore";
 import { windowOpen } from "../../utils/OpenLink";
 import { twMerge } from "tailwind-merge";
 import { useTaskStore } from "../../Store/TaskStore";
-import { notifySuccess } from "../../utils/constant";
+import { notifyError, notifySuccess } from "../../utils/constant";
 
 export default function TaskItem({ task }) {
   const { userId } = useUserId();
@@ -19,7 +19,7 @@ export default function TaskItem({ task }) {
     Array(task.miniTasks.length).fill(false)
   );
   const [completed, setCompleted] = useState(
-    Array(task.miniTasks.length).fill(false)
+    Array(task.miniTasks.length).fill("false")
   );
   const [claimLoading, setClaimLoading] = useState(false);
 
@@ -47,10 +47,44 @@ export default function TaskItem({ task }) {
 
       setCompleted((prevCompleted) => {
         const newCompleted = [...prevCompleted];
-        newCompleted[index] = true;
+        newCompleted[index] =
+          task.miniTasks[index].type === "telegram" ? "check" : "true";
         return newCompleted;
       });
     }, 5000);
+  };
+
+  const handleCheck = async (index) => {
+    setLoading((prevLoading) => {
+      const newLoading = [...prevLoading];
+      newLoading[index] = true;
+      return newLoading;
+    });
+
+    try {
+      const response = await api.post("/verify-task", {
+        userId: userId.userId,
+        taskId: task.id,
+        miniTaskIndex: index,
+      });
+      console.log(response);
+
+      setCompleted((prevCompleted) => {
+        const newCompleted = [...prevCompleted];
+        newCompleted[index] = "true";
+        return newCompleted;
+      });
+      notifySuccess("Task completed 🎁");
+    } catch (error) {
+      notifyError("Error (probably not joined yet)");
+      console.log(error);
+    } finally {
+      setLoading((prevLoading) => {
+        const newLoading = [...prevLoading];
+        newLoading[index] = false;
+        return newLoading;
+      });
+    }
   };
 
   const allCompleted = completed.every((status) => status);
@@ -109,12 +143,20 @@ export default function TaskItem({ task }) {
                 className="px-3 py-1.5 mb-0 min-w-16 !text-sm !bg-[#1D1D1E]"
                 onClick={(e) => {
                   e.stopPropagation();
-                  handleMiniTaskClick(index, miniTask.link);
+                  if (completed[index] === "false")
+                    handleMiniTaskClick(index, miniTask.link);
+                  else if (completed[index] === "check") {
+                    handleCheck(index);
+                  }
                 }}
-                disabled={completed[index]}
+                disabled={completed[index] === "true"}
                 loading={loading[index]}
               >
-                {completed[index] ? "Done" : "Go"}
+                {completed[index] === "check"
+                  ? "check"
+                  : completed[index] === "true"
+                  ? "Done"
+                  : "Go"}
               </Button>
             </div>
           ))}

@@ -17,7 +17,7 @@ export default function BottomBar({ activeTab, setActiveTab }) {
         onClick={() => setActiveTab("Investing")}
         className={twMerge(
           "text-[#474747] w-1/3 flex flex-col items-center gap-1 text-sm ",
-          activeTab === "Missions" && "text-[#AFEF28]"
+          activeTab === "Investing" && "text-[#AFEF28]"
         )}
       >
         <PiGiftLight className="size-6" />

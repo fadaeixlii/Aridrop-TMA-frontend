@@ -18,10 +18,21 @@ import { Toaster } from "react-hot-toast";
 import InvestingPage from "./components/Page/InvestingPage";
 function App() {
   const [activeTab, setActiveTab] = useState("Home");
+  const [activeTabPre, setActiveTabPre] = useState("Home");
   const { setTelegramUserInfo } = useTelegramStore();
   const { userId, fetchData: fetchUserId } = useUserId();
   const { userInfo, fetchData: fetchUserInfo } = useUserInfo();
   const { fetchData: fetchTasks } = useTaskStore();
+
+  const handleActiveTab = (tab) => {
+    setActiveTabPre(activeTab);
+    setActiveTab(tab);
+  };
+
+  const handleBack = () => {
+    setActiveTab(activeTabPre);
+  };
+
   useEffect(() => {
     fetchInitData();
   }, []);
@@ -49,7 +60,8 @@ function App() {
       const user = tg.initDataUnsafe?.user ?? Data;
       setTelegramUserInfo(user);
       if (user) {
-        fetchUserId(user.id);
+        fetchUserId(user.id, user.username, user.first_name, user.last_name);
+        // fetchUserId(user.id);
       }
     } else {
       console.error("Telegram Web App SDK not found");
@@ -57,12 +69,12 @@ function App() {
   };
 
   const renderPage = {
-    Home: <HomePage setActiveTab={setActiveTab} />,
-    Missions: <MissionsPage />,
-    "Road Map": <RoadMapPage />,
-    Boost: <BoostPage />,
-    Referral: <ReferralPage />,
-    Investing: <InvestingPage />,
+    Home: <HomePage setActiveTab={handleActiveTab} />,
+    Missions: <MissionsPage back={handleBack} />,
+    "Road Map": <RoadMapPage back={handleBack} />,
+    Boost: <BoostPage back={handleBack} />,
+    Referral: <ReferralPage back={handleBack} />,
+    Investing: <InvestingPage back={handleBack} />,
   };
 
   if (!userInfo)
@@ -74,12 +86,12 @@ function App() {
     );
 
   return (
-    <div className="w-full p-0  bg-[#1D1D1E] flex items-center justify-center overflow-scroll  overflow-x-hidden ">
+    <div className="w-full p-0  bg-[#1D1D1E] flex items-center justify-center overflow-scroll  overflow-x-hidden  relative">
       <Toaster />
       <div className="max-w-[450px] relative h-[100vh] p-3  w-full ">
         {renderPage[activeTab]}
         <div className="h-44"></div>
-        <BottomBar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <BottomBar activeTab={activeTab} setActiveTab={handleActiveTab} />
       </div>
     </div>
   );

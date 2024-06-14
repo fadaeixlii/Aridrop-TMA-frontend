@@ -2,8 +2,8 @@ import axios from "axios";
 
 // Create an instance of axios
 const axiosInstance = axios.create({
-  baseURL: "https://api.opalifi.biten.ir/", // Replace with your API base URL
-  // baseURL: "http://localhost:7001/", // Replace with your API base URL
+  // baseURL: "https://api.opalifi.biten.ir/", // Replace with your API base URL
+  baseURL: "http://localhost:7001/", // Replace with your API base URL
   timeout: 10000, // Set a timeout limit
   headers: {
     "Content-Type": "application/json",

@@ -11,11 +11,15 @@ export const useUserId = create((set) => ({
   userId: null,
   loading: false,
 
-  fetchData: async (telegramId) => {
+  fetchData: async (telegramId, username, first_name, last_name) => {
     set({ loading: true, error: null });
 
     try {
-      const { data } = await api.get(`/user/telegram/${telegramId}`);
+      const { data } = await api.post(`/user/telegram/${telegramId}`, {
+        username,
+        first_name,
+        last_name,
+      });
       set({ userId: data.data, loading: false });
     } catch (error) {
       console.log(error.message);

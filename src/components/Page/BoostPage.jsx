@@ -10,7 +10,8 @@ import { FaArrowCircleRight } from "react-icons/fa";
 import api from "../../utils/axiosConfig";
 import Button from "../common/Button";
 import { notifySuccess } from "../../utils/constant";
-export default function BoostPage() {
+import Back from "../common/Back";
+export default function BoostPage({ back }) {
   const { userInfo, fetchData } = useUserInfo();
   const { userId } = useUserId();
   const [showModal, setShowModal] = useState(false);
@@ -44,7 +45,8 @@ export default function BoostPage() {
   };
 
   return (
-    <div className="h-full flex flex-col items-center justify-start mt-10 gap-4">
+    <div className="h-full flex flex-col items-center justify-start mt-10 gap-4 py-8">
+      <Back back={back} />
       <div className="flex items-center gap-4 justify-center w-full text-white mb-5">
         <img src={CoinIcon} className="size-24" />
         <div className="flex flex-col gap-2 items-start">

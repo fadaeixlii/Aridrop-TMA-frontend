@@ -1,10 +1,12 @@
-import React from "react";
 import Button from "../common/Button";
 import { twMerge } from "tailwind-merge";
+import Back from "../common/Back";
 
-export default function InvestingPage() {
+export default function InvestingPage({ back }) {
   return (
-    <div className="flex flex-col gap-3 w-full text-white py-2">
+    <div className="flex flex-col gap-3 w-full text-white py-2 py-8">
+      <Back back={back} />
+
       <div className="flex items-center justify-between w-full">
         <p className="">InvestingPage</p>
         <div

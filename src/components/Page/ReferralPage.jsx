@@ -5,8 +5,9 @@ import ReferralItem from "../common/ReferralItem";
 import { useMemo } from "react";
 import { getUserRankInfo } from "../../utils/constant";
 import TelegramProfileImage from "../common/TelegramProfile";
+import Back from "../common/Back";
 
-export default function ReferralPage() {
+export default function ReferralPage({ back }) {
   const { userInfo } = useUserInfo();
   const { userId } = useUserId();
 
@@ -15,7 +16,9 @@ export default function ReferralPage() {
     [userInfo?.storedScore]
   );
   return (
-    <div className="h-full flex flex-col items-center justify-start mt-4 gap-4 text-white">
+    <div className="h-full flex flex-col items-center justify-start mt-4 gap-4 text-white py-8">
+      <Back back={back} />
+
       <p className="text-ls text-left mr-auto">Referral Page</p>
 
       <div className="customBox p-4">

@@ -7,7 +7,9 @@ export default function ReferralItem({ user }) {
       <span className="text-white mr-auto">
         {`${user.firstName ?? ""} ${user.lastName ?? ""}`}
       </span>
-      <span className=" text-md number">{user.storedScore} OPL</span>
+      <span className=" text-md number">
+        {Math.round(user.rewardFromRank / 5 + 1000)} OPL
+      </span>
     </div>
   );
 }
