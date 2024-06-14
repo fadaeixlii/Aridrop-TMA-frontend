@@ -156,7 +156,11 @@ export default function TaskItem({ task }) {
                 onClick={(e) => {
                   e.stopPropagation();
                   if (completed[index] === "false")
-                    handleMiniTaskClick(index, miniTask.link, miniTask.type);
+                    handleMiniTaskClick(
+                      index,
+                      miniTask.link ?? "",
+                      miniTask.type ?? ""
+                    );
                   else if (completed[index] === "check") {
                     handleCheck(index);
                   }
