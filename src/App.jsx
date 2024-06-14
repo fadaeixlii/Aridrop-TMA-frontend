@@ -53,9 +53,10 @@ function App() {
         tg.MainButton.hide();
       }
 
-      if (tg.BackButton) {
-        tg.BackButton.hide();
-      }
+      WebApp.BackButton.onClick(() => handleBack());
+      WebApp.themeParams.bg_color = "#1D1D1E";
+      WebApp.themeParams.header_bg_color = "#1D1D1E";
+      WebApp.themeParams.section_bg_color = "#1D1D1E";
 
       const user = tg.initDataUnsafe?.user ?? Data;
       setTelegramUserInfo(user);

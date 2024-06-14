@@ -6,6 +6,7 @@ import { windowOpen } from "../../utils/OpenLink";
 import { twMerge } from "tailwind-merge";
 import { useTaskStore } from "../../Store/TaskStore";
 import { notifyError, notifySuccess } from "../../utils/constant";
+import WebApp from "@twa-dev/sdk";
 
 export default function TaskItem({ task }) {
   const { userId } = useUserId();
@@ -38,6 +39,7 @@ export default function TaskItem({ task }) {
 
     setTimeout(() => {
       windowOpen(link, "_blank");
+      WebApp.openLink(link);
 
       setLoading((prevLoading) => {
         const newLoading = [...prevLoading];
