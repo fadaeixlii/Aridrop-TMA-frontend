@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import Button from "./Button";
 import api from "../../utils/axiosConfig";
 import { useUserId, useUserInfo } from "../../Store/TelegramStore";
-import { windowOpen } from "../../utils/OpenLink";
 import { twMerge } from "tailwind-merge";
 import { useTaskStore } from "../../Store/TaskStore";
 import { notifyError, notifySuccess } from "../../utils/constant";
@@ -30,7 +29,7 @@ export default function TaskItem({ task }) {
     }
   }, [open]);
 
-  const handleMiniTaskClick = (index, link) => {
+  const handleMiniTaskClick = (index, link, type) => {
     setLoading((prevLoading) => {
       const newLoading = [...prevLoading];
       newLoading[index] = true;
@@ -38,8 +37,8 @@ export default function TaskItem({ task }) {
     });
 
     setTimeout(() => {
-      windowOpen(link, "_blank");
-      WebApp.openLink(link);
+      if (type === "telegram") WebApp.openTelegramLink(link);
+      else WebApp.openLink(link);
 
       setLoading((prevLoading) => {
         const newLoading = [...prevLoading];
@@ -146,7 +145,7 @@ export default function TaskItem({ task }) {
                 onClick={(e) => {
                   e.stopPropagation();
                   if (completed[index] === "false")
-                    handleMiniTaskClick(index, miniTask.link);
+                    handleMiniTaskClick(index, miniTask.link, miniTask.type);
                   else if (completed[index] === "check") {
                     handleCheck(index);
                   }
