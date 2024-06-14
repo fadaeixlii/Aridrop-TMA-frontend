@@ -79,13 +79,14 @@ export default function TaskItem({ task }) {
         miniTaskIndex: index,
       });
       console.log(response);
-
-      setCompleted((prevCompleted) => {
-        const newCompleted = [...prevCompleted];
-        newCompleted[index] = "true";
-        return newCompleted;
-      });
-      notifySuccess("Task completed 🎁");
+      if (response.data.success) {
+        setCompleted((prevCompleted) => {
+          const newCompleted = [...prevCompleted];
+          newCompleted[index] = "true";
+          return newCompleted;
+        });
+        notifySuccess("Task completed 🎁");
+      }
     } catch (error) {
       notifyError("Error (probably not joined yet)");
       console.log(error);
@@ -98,7 +99,7 @@ export default function TaskItem({ task }) {
     }
   };
 
-  const allCompleted = completed.every((status) => status);
+  const allCompleted = completed.every((status) => status === "true");
 
   const handleClickClaim = async (e) => {
     e.stopPropagation();
