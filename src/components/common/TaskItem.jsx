@@ -5,12 +5,13 @@ import { useUserId, useUserInfo } from "../../Store/TelegramStore";
 import { twMerge } from "tailwind-merge";
 import { useTaskStore } from "../../Store/TaskStore";
 import { notifyError, notifySuccess } from "../../utils/constant";
-import WebApp from "@twa-dev/sdk";
-
+import { initUtils } from "@tma.js/sdk";
 export default function TaskItem({ task }) {
   const { userId } = useUserId();
   const { fetchData: fetchTasks } = useTaskStore();
   const { fetchData } = useUserInfo();
+
+  const utils = initUtils();
 
   const [open, setOpen] = useState(false);
   const contentRef = useRef(null);
@@ -29,7 +30,7 @@ export default function TaskItem({ task }) {
     }
   }, [open]);
 
-  const handleMiniTaskClick = (index, link, type) => {
+  const handleMiniTaskClick = (index, link) => {
     setLoading((prevLoading) => {
       const newLoading = [...prevLoading];
       newLoading[index] = true;
@@ -38,12 +39,13 @@ export default function TaskItem({ task }) {
 
     setTimeout(() => {
       console.log(link);
-      if (WebApp) {
-        const tg = WebApp;
-        tg.ready();
+      // if (WebApp) {
+      //   const tg = WebApp;
+      //   tg.ready();
 
-        tg.openTelegramLink(link);
-      }
+      //   tg.openTelegramLink(link);
+      // }
+      if (link) utils.openTelegramLink(link);
 
       setLoading((prevLoading) => {
         const newLoading = [...prevLoading];
