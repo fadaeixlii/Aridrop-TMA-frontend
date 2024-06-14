@@ -46,7 +46,8 @@ export default function TaskItem({ task }) {
       //   tg.openTelegramLink(link);
       // }
       if (link) {
-        utils.openTelegramLink(link);
+        if (type === "telegram") utils.openTelegramLink(link);
+        else utils.openLink(link);
       }
 
       setLoading((prevLoading) => {
