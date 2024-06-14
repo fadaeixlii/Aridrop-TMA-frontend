@@ -38,7 +38,12 @@ export default function TaskItem({ task }) {
 
     setTimeout(() => {
       console.log(link);
-      WebApp.openTelegramLink(link);
+      if (WebApp) {
+        const tg = WebApp;
+        tg.ready();
+
+        tg.openTelegramLink(link);
+      }
 
       setLoading((prevLoading) => {
         const newLoading = [...prevLoading];
