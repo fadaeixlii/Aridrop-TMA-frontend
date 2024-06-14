@@ -30,7 +30,7 @@ export default function TaskItem({ task }) {
     }
   }, [open]);
 
-  const handleMiniTaskClick = (index, link) => {
+  const handleMiniTaskClick = (index, link, type) => {
     setLoading((prevLoading) => {
       const newLoading = [...prevLoading];
       newLoading[index] = true;
@@ -45,7 +45,10 @@ export default function TaskItem({ task }) {
 
       //   tg.openTelegramLink(link);
       // }
-      if (link) utils.openTelegramLink(link);
+      if (link) {
+        if (type === "telegram") utils.openTelegramLink(link);
+        else utils.openLink(link);
+      }
 
       setLoading((prevLoading) => {
         const newLoading = [...prevLoading];
