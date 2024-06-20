@@ -87,7 +87,7 @@ const TimerButton: React.FC = () => {
     >
       <Button
         loading={loading}
-        disabled={isButtonDisabled}
+        disabled={isButtonDisabled || loading}
         onClick={fetchDate}
         className={twMerge(
           "flex items-center gap-2 w-full justify-center py-4 rounded-2xl mb-0",
