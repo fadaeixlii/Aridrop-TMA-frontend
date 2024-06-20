@@ -16,7 +16,7 @@ export default function TaskItem({ task }: TaskItemProps) {
   const { fetchData: fetchTasks } = useTaskStore();
   const { fetchData } = useUserInfo();
 
-  // const utils = initUtils();
+  const utils = initUtils();
 
   const [open, setOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -44,10 +44,10 @@ export default function TaskItem({ task }: TaskItemProps) {
 
     setTimeout(() => {
       console.log(link);
-      // if (link) {
-      //   if (type === "telegram") utils.openTelegramLink(link);
-      //   else utils.openLink(link);
-      // }
+      if (link) {
+        if (type === "telegram") utils.openTelegramLink(link);
+        else utils.openLink(link);
+      }
 
       setLoading((prevLoading) => {
         const newLoading = [...prevLoading];
