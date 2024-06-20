@@ -13,7 +13,7 @@ const ReferralItem: React.FC<ReferralItemProps> = ({ user }) => {
         {`${user.firstName ?? ""} ${user.lastName ?? ""}`}
       </span>
       <span className="text-md number">
-        {Math.round(user.rewardFromRank / 5 + 1000)} OPL
+        {Math.round(user.rewardFromRank * 0.025 + 500)} OPL
       </span>
     </div>
   );

@@ -32,7 +32,11 @@ const ReferralPage: React.FC<Props> = ({ back }) => {
         <img src={userRank.icon} alt="" className="size-24 mx-auto my-2" />
         <p className="text-xl text-center text-white my-2">{userRank.key}</p>
         <p className="text-xl text-center text-white my-2">
-          NextRank: <span className="number">{userRank.nextRank}</span> OPL
+          {userRank.nextRank !== Infinity ? (
+            <>
+              NextRank: <span className="number">{userRank.nextRank}</span> OPL
+            </>
+          ) : null}
         </p>
         <div className="flex items-center gap-3 flex-wrap justify-center my-2">
           <TelegramProfileImage

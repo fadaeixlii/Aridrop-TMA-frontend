@@ -1,13 +1,11 @@
-import React from "react";
 import WalletOption from "./WalletOption";
-type Props = {};
+import { useAccount } from "wagmi";
+import { Account } from "./Account";
 
-const ConnectWallet = (_props: Props) => {
-  return (
-    <div>
-      <WalletOption />
-    </div>
-  );
-};
+function ConnectWallet() {
+  const { isConnected } = useAccount();
+  if (isConnected) return <Account />;
+  return <WalletOption />;
+}
 
 export default ConnectWallet;
