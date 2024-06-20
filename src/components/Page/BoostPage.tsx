@@ -85,7 +85,7 @@ const BoostPage: React.FC<BoostPageProps> = ({ back }) => {
           <div>
             <span>{userInfo.timeLimit} Minute </span>
             {" /"}
-            <span className="number"> -0.25 minute</span>
+            <span className="number"> -6 minute</span>
             <p>
               {" "}
               Cost:{" "}
@@ -101,7 +101,7 @@ const BoostPage: React.FC<BoostPageProps> = ({ back }) => {
             level: 20 - userInfo.timeLimitMaxBoostCount,
             title: "Claim Time",
             currentValue: <span>{userInfo.timeLimit} Minute </span>,
-            nextValue: <span>{userInfo.timeLimit - 0.25} Minute </span>,
+            nextValue: <span>{userInfo.timeLimit - 6} Minute </span>,
             onClick: () => handleBoost("timeLimit"),
           });
           setShowModal(true);
@@ -115,7 +115,7 @@ const BoostPage: React.FC<BoostPageProps> = ({ back }) => {
           <div>
             <span>{userInfo.maxScore} OPL </span>
             {" /"}
-            <span className="number"> +5 OPL</span>
+            <span className="number"> +10 OPL</span>
             <p>
               {" "}
               Cost:{" "}
@@ -131,7 +131,7 @@ const BoostPage: React.FC<BoostPageProps> = ({ back }) => {
             level: 20 - userInfo.maxScoreMaxBoostCount,
             title: "Profit per claim",
             currentValue: <span>{userInfo.maxScore} OPL </span>,
-            nextValue: <span>{userInfo.maxScore + 5} OPL </span>,
+            nextValue: <span>{userInfo.maxScore + 10} OPL </span>,
             onClick: () => handleBoost("maxScore"),
           });
           setShowModal(true);
