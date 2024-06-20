@@ -27,7 +27,7 @@ const TimerButton: React.FC = () => {
   );
 
   const fetchDate = async () => {
-    if (!userId) return;
+    if (!userId || loading) return;
     setLoading(true);
 
     try {
@@ -91,7 +91,9 @@ const TimerButton: React.FC = () => {
         onClick={fetchDate}
         className={twMerge(
           "flex items-center gap-2 w-full justify-center py-4 rounded-2xl mb-0",
-          isButtonDisabled ? "bg-[#1D1D1E]/50 text-[#AFEF28]" : "bg-[#1D1D1E]"
+          isButtonDisabled || loading
+            ? "bg-[#1D1D1E]/50 text-[#AFEF28]"
+            : "bg-[#1D1D1E]"
         )}
       >
         {isButtonDisabled ? (
