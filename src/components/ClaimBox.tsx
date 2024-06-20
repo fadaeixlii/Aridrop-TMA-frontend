@@ -74,12 +74,12 @@ const ClaimBox: React.FC<ClaimBoxProps> = ({ setActiveTab }) => {
         </div>
       </div>
 
-      <div className="flex items-center gap-3 w-full">
+      <div className="flex items-center flex-col gap-3 w-full">
         <Button
           onClick={() => {
             setActiveTab("Boost");
           }}
-          className="flex items-center gap-2 mb-0 w-1/2 justify-center py-4 bg-[#1D1D1E] rounded-2xl"
+          className="flex items-center gap-2 mb-0 w-full justify-center py-4 bg-[#1D1D1E] rounded-2xl"
         >
           <PiSpeedometerLight className="w-5 h-5" />
           Boost

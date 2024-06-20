@@ -76,10 +76,16 @@ const TimerButton: React.FC = () => {
     };
   }, [countdown]);
 
+  const claimed = userInfo?.timeLimit
+    ? (
+        (1 - countdown! / (userInfo?.timeLimit * 60)) *
+        userInfo.maxScore
+      ).toFixed(3)
+    : 0;
   return (
     <div
       className={twMerge(
-        "p-[2px] w-1/2 rounded-2xl bg-gradient-to-r",
+        "p-[2px] w-full rounded-2xl bg-gradient-to-r",
         isButtonDisabled
           ? ""
           : " from-red-500 via-purple-500 to-blue-500 animate-border"
@@ -99,11 +105,13 @@ const TimerButton: React.FC = () => {
         {isButtonDisabled ? (
           <span className="font-mono flex items-center gap-2">
             <PiClockAfternoonLight className="w-5 h-5" />
-            {` ${Math.floor(countdown! / 60)
+            {` ${Math.floor(countdown! / 3600)
+              .toString()
+              .padStart(2, "0")}:${Math.floor((countdown! % 3600) / 60)
               .toString()
               .padStart(2, "0")}:${(countdown! % 60)
               .toString()
-              .padStart(2, "0")} fill`}
+              .padStart(2, "0")} fill / ${claimed}`}
           </span>
         ) : (
           <>
