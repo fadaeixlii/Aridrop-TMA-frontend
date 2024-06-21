@@ -20,9 +20,9 @@ const TimerButton: React.FC = () => {
       disabled={isButtonDisabled || loading}
       onClick={fetchDate}
       className={twMerge(
-        "flex items-center gap-2 w-full justify-center py-4 rounded-lg mb-0 relative ",
+        "flex items-center gap-2 w-full justify-center py-4 !rounded-lg mb-0 relative ",
         isButtonDisabled || loading
-          ? "bg-[#1D1D1E]/50 text-[#90ff46]"
+          ? "!bg-[#1D1D1E]/50 !text-[#90ff46]"
           : "!bg-white "
       )}
     >
@@ -30,7 +30,7 @@ const TimerButton: React.FC = () => {
         <span className="font-mono flex items-center gap-2 text-xs">
           <div
             className={clsx(
-              "absolute left-0 top-0 h-full bg-[#5a761e7e] z-[-1] rounded-l-lg "
+              "absolute left-0 top-0 h-full !bg-[#5a761e7e] z-[-1] !rounded-l-lg "
             )}
             style={{
               width: `${percent}%`,
@@ -47,7 +47,7 @@ const TimerButton: React.FC = () => {
             .padStart(2, "0")} fill / ${claimed} OPA`}
         </span>
       ) : (
-        <div className="flex items-center text-black gap-2 text-xs">
+        <div className="flex items-center !text-black gap-2 text-xs">
           <PiPipeWrenchLight className="size-5" />{" "}
           {`Claim ${userInfo?.maxScore} OPA / Start mining`}
         </div>
