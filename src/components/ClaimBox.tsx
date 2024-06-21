@@ -1,4 +1,9 @@
-import { PiCoinsLight, PiSpeedometerLight } from "react-icons/pi";
+import {
+  PiBatteryChargingVertical,
+  PiBatteryChargingVerticalFill,
+  PiCoinsLight,
+  PiSpeedometerLight,
+} from "react-icons/pi";
 import CoinIcon from "../assets/CoinIcon.svg";
 import Button from "./common/Button";
 import AnimatedCounter from "./common/AnimatedNumber";
@@ -6,6 +11,8 @@ import { useUserInfo } from "../Store/TelegramStore";
 import { useEffect, useMemo, useState } from "react";
 import { getUserRankInfo, RankInfo } from "../utils/constant";
 import TimerButton from "./TimerBtn";
+import TelegramProfileImage from "./common/TelegramProfile";
+import { InfoBox } from "./InfoBox";
 
 interface ClaimBoxProps {
   setActiveTab: (tab: string) => void;
@@ -37,20 +44,32 @@ const ClaimBox: React.FC<ClaimBoxProps> = ({ setActiveTab }) => {
   if (!userInfo) return null;
 
   return (
-    <div className="w-full flex flex-col items-start justify-between gap-10 rounded-2xl p-3 animated-background bg-gradient-to-r from-[#e0f559] via-[#d7ee3d] to-[#91ee5e] z-[1]">
-      <div className="flex items-center gap-1 flex-wrap">
-        <img src={userRank.icon} alt="" className="w-4 h-4" />
-        <div className="font-bold">{`${userInfo?.firstName ?? ""} ${
-          userInfo?.lastName ?? ""
-        }`}</div>
-        {userInfo?.profitPerHour > 0 && (
+    <div className="w-full flex flex-col h-full max-h-full items-start justify-between gap-10 rounded-2xl p-3 mb-24 z-[1]">
+      <div className="flex items-center gap-1 flex-wrap w-full">
+        <TelegramProfileImage telegramId={userInfo.telegramId} />
+        <div className=" text-white mx-2 truncate grow">{`${
+          userInfo?.firstName ?? ""
+        } ${userInfo?.lastName ?? ""}`}</div>
+        <span
+          className="bg-[#282C51]/30 border border-[#363B6C] flex items-center justify-center size-12 rounded-lg "
+          onClick={() => {
+            setActiveTab("Boost");
+          }}
+        >
+          <PiBatteryChargingVerticalFill className="size-[50%] text-[#45E89D]" />
+        </span>
+        {/* {userInfo?.profitPerHour > 0 && (
           <div className="mr-auto flex items-center">
             {userInfo.profitPerHour}/Hour OPL
           </div>
-        )}
+        )} */}
       </div>
 
-      <div className="flex items-center gap-4 justify-center w-full">
+      <div className="flex w-full justify-center items-center  ">
+        <img src={userRank.icon} alt="" className="aspect-square w-4/5" />
+      </div>
+
+      {/* <div className="flex items-center gap-4 justify-center w-full">
         <img src={CoinIcon} className="" />
         <div className="flex flex-col gap-2 items-start">
           <div className="flex items-center gap-2">
@@ -72,18 +91,10 @@ const ClaimBox: React.FC<ClaimBoxProps> = ({ setActiveTab }) => {
             <span className="font-semibold">OPL per claim</span>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex items-center flex-col gap-3 w-full">
-        <Button
-          onClick={() => {
-            setActiveTab("Boost");
-          }}
-          className="flex items-center gap-2 mb-0 w-full justify-center py-4 bg-[#1D1D1E] rounded-2xl"
-        >
-          <PiSpeedometerLight className="w-5 h-5" />
-          Boost
-        </Button>
+        <InfoBox />
         <TimerButton />
       </div>
     </div>

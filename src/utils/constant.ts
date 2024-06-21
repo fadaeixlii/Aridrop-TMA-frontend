@@ -86,17 +86,18 @@ const findLastIndex = (
 };
 
 export const getUserRankInfo = (userScore: number): UserRankInfo => {
-  const Index = findLastIndex(ranksInfo, (rank) => rank.score >= userScore);
+  const Index = findLastIndex(ranksInfo, (rank) => rank.score <= userScore);
   if (Index < 0)
     return {
-      key: "Rank 10",
-      icon: Rank10,
-      score: 100000,
-      nextRank: Infinity,
+      key: "Rank 1",
+      icon: Rank1,
+      score: 1000,
+      nextRank: 1000,
     };
   return {
     ...ranksInfo[Index],
-    nextRank: Index !== ranksInfo.length ? ranksInfo[Index].score : Infinity,
+    nextRank:
+      Index + 1 <= ranksInfo.length - 1 ? ranksInfo[Index + 1].score : Infinity,
   };
 };
 

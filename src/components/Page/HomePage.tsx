@@ -9,14 +9,13 @@ interface Props {
 }
 
 const HomePage: React.FC<Props> = ({ setActiveTab }) => {
-  const { tasks, loading: loadingTask } = useTaskStore();
-  const activeTasks: Task[] = tasks.filter((task: Task) => !task.isCompleted);
+  const { tasks } = useTaskStore();
 
   return (
-    <div className="flex flex-col gap-5 w-full">
+    <div className="flex flex-col gap-5 w-full h-screen max-h-screen o">
       <ClaimBox setActiveTab={setActiveTab} />
-      <ReferralAndClub setActiveTab={setActiveTab} />
-      <div className="text-white text-lg flex justify-between items-center">
+      {/* <ReferralAndClub setActiveTab={setActiveTab} /> */}
+      {/* <div className="text-white text-lg flex justify-between items-center">
         <span>Start Missions Now!</span>
         <span
           onClick={() => {
@@ -39,7 +38,7 @@ const HomePage: React.FC<Props> = ({ setActiveTab }) => {
         <span className="text-white text-center">
           No active tasks available!
         </span>
-      )}
+      )} */}
     </div>
   );
 };

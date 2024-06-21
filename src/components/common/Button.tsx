@@ -47,7 +47,7 @@ const Button: React.FC<ButtonProps> = ({
 
   const variantStyles: { [key: string]: string } = {
     default: "",
-    disabled: "opacity-50 cursor-not-allowed",
+    disabled: "bg-opacity-50 cursor-not-allowed",
     loading: "cursor-wait",
   };
 

@@ -20,6 +20,7 @@ import MissionsPage from "components/Page/MissionsPage";
 import RoadMapPage from "components/Page/RoadMapPage";
 import ReferralPage from "components/Page/ReferralPage";
 import InvestingPage from "components/Page/InvestingPage";
+import useClaimHandler from "utils/useClaimHandler";
 
 const queryClient = new QueryClient();
 
@@ -85,6 +86,15 @@ function App() {
     Investing: <InvestingPage back={handleBack} />,
   };
 
+  // const { startCountdown, calculateRemainingSeconds } = useClaimHandler();
+  // useEffect(() => {
+  //   if (userInfo && userInfo.lastClaimTimestamp) {
+  //     const date = new Date(userInfo.lastClaimTimestamp);
+  //     const remainingSeconds = calculateRemainingSeconds(date);
+  //     if (remainingSeconds) startCountdown(remainingSeconds);
+  //   }
+  // }, [userInfo]);
+
   if (!userInfo) {
     return (
       <>
@@ -97,11 +107,14 @@ function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <div className="w-full p-0 bg-[#1D1D1E] flex items-center justify-center overflow-scroll overflow-x-hidden relative">
+        <div className="w-full p-0 bg-[#1D1D1E] z-10 flex items-center justify-center overflow-scroll overflow-x-hidden relative">
           <Toaster />
+          <div className="main z-[-1]">
+            <div className="gradient"></div>
+          </div>
           <div className="max-w-[450px] relative h-[100vh] p-3 w-full">
             {renderPage[activeTab]}
-            <div className="h-44"></div>
+            {activeTab === "Home" ? null : <div className="h-44"></div>}
             <BottomBar activeTab={activeTab} setActiveTab={handleActiveTab} />
           </div>
         </div>

@@ -1,125 +1,58 @@
-import { useState, useEffect, useCallback } from "react";
+import { useUserInfo } from "Store/TelegramStore";
 import Button from "./common/Button";
 import { PiClockAfternoonLight, PiPipeWrenchLight } from "react-icons/pi";
-import { useUserId, useUserInfo } from "../Store/TelegramStore";
-import api from "../utils/axiosConfig";
 import { twMerge } from "tailwind-merge";
+import useClaimHandler from "utils/useClaimHandler";
+import clsx from "clsx";
 
 const TimerButton: React.FC = () => {
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
-  const [countdown, setCountdown] = useState<number | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { isButtonDisabled, loading, countdown, claimed, fetchDate } =
+    useClaimHandler();
 
-  const { userInfo, claim } = useUserInfo();
-  const { userId } = useUserId();
+  const { userInfo } = useUserInfo();
+  if (!userInfo) return null;
 
-  const calculateRemainingSeconds = useCallback(
-    (lastClaimTime: Date) => {
-      if (!userInfo) return 0;
-      const nowDate = new Date();
-      const nextClaimDate = new Date(
-        lastClaimTime.getTime() + userInfo.timeLimit * 60 * 1000
-      );
-      const remainingTime = nextClaimDate.getTime() - nowDate.getTime();
-      return Math.max(Math.floor(remainingTime / 1000), 0);
-    },
-    [userInfo]
-  );
+  const percent = Math.round((+claimed / userInfo?.maxScore) * 100);
 
-  const fetchDate = async () => {
-    if (!userId || loading) return;
-    setLoading(true);
-
-    try {
-      const response = await api.post("/claim", {
-        userId: userId.userId,
-      });
-      const { data } = response;
-      const date = new Date(data.body.lastClaimTimestamp);
-      const remainingSeconds = calculateRemainingSeconds(date);
-
-      startCountdown(remainingSeconds);
-      claim();
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (userInfo && userInfo.lastClaimTimestamp) {
-      const date = new Date(userInfo.lastClaimTimestamp);
-      const remainingSeconds = calculateRemainingSeconds(date);
-      if (remainingSeconds) startCountdown(remainingSeconds);
-    }
-  }, [calculateRemainingSeconds, userInfo]);
-
-  // Function to start the countdown
-  const startCountdown = (seconds: number) => {
-    setIsButtonDisabled(true);
-    setCountdown(seconds);
-  };
-
-  // Use useEffect to handle the countdown timer
-  useEffect(() => {
-    let timer: NodeJS.Timeout | null = null;
-    if (countdown !== null && countdown > 0) {
-      timer = setTimeout(() => {
-        setCountdown((prevCountdown) => prevCountdown! - 1);
-      }, 1000);
-    } else if (countdown === 0) {
-      setIsButtonDisabled(false);
-    }
-    return () => {
-      if (timer) clearTimeout(timer);
-    };
-  }, [countdown]);
-
-  const claimed = userInfo?.timeLimit
-    ? (
-        (1 - countdown! / (userInfo?.timeLimit * 60)) *
-        userInfo.maxScore
-      ).toFixed(3)
-    : 0;
   return (
-    <div
+    <Button
+      loading={loading}
+      disabled={isButtonDisabled || loading}
+      onClick={fetchDate}
       className={twMerge(
-        "p-[2px] w-full rounded-2xl bg-gradient-to-r",
-        isButtonDisabled
-          ? ""
-          : " from-red-500 via-purple-500 to-blue-500 animate-border"
+        "flex items-center gap-2 w-full justify-center py-4 rounded-lg mb-0 relative ",
+        isButtonDisabled || loading
+          ? "bg-[#1D1D1E]/50 text-[#90ff46]"
+          : "!bg-white "
       )}
     >
-      <Button
-        loading={loading}
-        disabled={isButtonDisabled || loading}
-        onClick={fetchDate}
-        className={twMerge(
-          "flex items-center gap-2 w-full justify-center py-4 rounded-2xl mb-0",
-          isButtonDisabled || loading
-            ? "bg-[#1D1D1E]/50 text-[#AFEF28]"
-            : "bg-[#1D1D1E]"
-        )}
-      >
-        {isButtonDisabled ? (
-          <span className="font-mono flex items-center gap-2">
-            <PiClockAfternoonLight className="w-5 h-5" />
-            {` ${Math.floor(countdown! / 3600)
-              .toString()
-              .padStart(2, "0")}:${Math.floor((countdown! % 3600) / 60)
-              .toString()
-              .padStart(2, "0")}:${(countdown! % 60)
-              .toString()
-              .padStart(2, "0")} fill / ${claimed}`}
-          </span>
-        ) : (
-          <>
-            <PiPipeWrenchLight className="w-5 h-5" /> {"Claim"}
-          </>
-        )}
-      </Button>
-    </div>
+      {isButtonDisabled ? (
+        <span className="font-mono flex items-center gap-2 text-xs">
+          <div
+            className={clsx(
+              "absolute left-0 top-0 h-full bg-[#5a761e7e] z-[-1] rounded-l-lg "
+            )}
+            style={{
+              width: `${percent}%`,
+            }}
+          ></div>
+          <PiClockAfternoonLight className="size-5" />
+          {"Claim in :"}
+          {` ${Math.floor(countdown! / 3600)
+            .toString()
+            .padStart(2, "0")}:${Math.floor((countdown! % 3600) / 60)
+            .toString()
+            .padStart(2, "0")}:${(countdown! % 60)
+            .toString()
+            .padStart(2, "0")} fill / ${claimed} OPA`}
+        </span>
+      ) : (
+        <div className="flex items-center text-black gap-2 text-xs">
+          <PiPipeWrenchLight className="size-5" />{" "}
+          {`Claim ${userInfo?.maxScore} OPA / Start mining`}
+        </div>
+      )}
+    </Button>
   );
 };
 

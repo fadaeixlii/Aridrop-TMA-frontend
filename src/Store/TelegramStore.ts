@@ -36,7 +36,7 @@ export interface IUser {
   robotTimeRemain: number;
   storedScore: number;
   referralCode?: string;
-  lastClaimTimestamp?: Date;
+  lastClaimTimestamp?: number;
   timeLimit: number;
   nextRankScore: number;
   maxScoreMaxBoostCount: number;
@@ -44,7 +44,7 @@ export interface IUser {
   completedTasks: string[];
   profitPerHour: number;
   rewardFromRank: number;
-  lastTimeCallApi: Date;
+  lastTimeCallApi: number;
 }
 
 // Define the structure of a User info
@@ -61,7 +61,7 @@ export interface UserInfo {
   parentReferral: IUser;
   robot: IRobot;
   robotTimeRemain: number;
-  lastClaimTimestamp: null | Date;
+  lastClaimTimestamp: null | number;
   timeLimit: number;
   userMaxScorePrice: number;
   userTimeLimitPrice: number;
