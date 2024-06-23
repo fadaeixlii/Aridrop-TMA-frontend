@@ -32,7 +32,7 @@ const MissionsPage: React.FC<Props> = ({ back }) => {
             userInfo?.lastName ?? ""
           }`}</div>
         </div>
-        <div className="text-center font-extralight text-4xl py-4 font-mono flex items-center gap-1">
+        <div className="text-center font-extralight text-4xl py-4 font-mono flex items-center gap-1 justify-center">
           <AnimatedCounter
             from={userInfo.storedScore || 0}
             to={userInfo.storedScore}
