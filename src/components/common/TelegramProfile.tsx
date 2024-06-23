@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
+import { PiUserCircleDuotone } from "react-icons/pi";
+import { twMerge } from "tailwind-merge";
 import api from "utils/axiosConfig";
 
 interface TelegramProfileImageProps {
   telegramId: string;
+  className?: string;
 }
 
 const TelegramProfileImage: React.FC<TelegramProfileImageProps> = ({
   telegramId,
+  className,
 }) => {
   const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -31,7 +35,10 @@ const TelegramProfileImage: React.FC<TelegramProfileImageProps> = ({
     return (
       <svg
         aria-hidden="true"
-        className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+        className={twMerge(
+          "w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600 mx-auto",
+          className
+        )}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +56,7 @@ const TelegramProfileImage: React.FC<TelegramProfileImageProps> = ({
   }
 
   if (error) {
-    return null;
+    return <PiUserCircleDuotone className={twMerge("size-10", className)} />;
   }
 
   return (
@@ -58,10 +65,10 @@ const TelegramProfileImage: React.FC<TelegramProfileImageProps> = ({
         <img
           src={profileImageUrl}
           alt="Telegram Profile"
-          className="rounded-full size-10"
+          className={twMerge("size-10 rounded-full", className)}
         />
       ) : (
-        <div className="text-center text-gray-500">No image available</div>
+        <PiUserCircleDuotone className={twMerge("size-10", className)} />
       )}
     </div>
   );

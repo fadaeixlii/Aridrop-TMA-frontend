@@ -107,14 +107,12 @@ function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <div className="w-full p-0 bg-[#1D1D1E] z-10 flex items-center justify-center overflow-scroll overflow-x-hidden relative">
+        <div className="w-full p-0 bg-[#1D1D1E] h-[100vh] max-h-screen  z-10 flex items-center justify-center overflow-auto  overflow-x-hidden relative">
           <Toaster />
-          <div className="main z-[-1]">
-            <div className="gradient"></div>
-          </div>
-          <div className="max-w-[450px] relative h-[100vh] p-3 w-full">
+          <div className="gradient"></div>
+          <div className="max-w-[450px] relative h-[100vh] px-2 w-full">
             {renderPage[activeTab]}
-            {activeTab === "Home" ? null : <div className="h-44"></div>}
+
             <BottomBar activeTab={activeTab} setActiveTab={handleActiveTab} />
           </div>
         </div>

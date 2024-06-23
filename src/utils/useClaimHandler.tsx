@@ -94,7 +94,7 @@ const useClaimHandler = () => {
     ? (
         (1 - countdown! / (userInfo?.timeLimit * 60)) *
         userInfo.maxScore
-      ).toFixed(0)
+      ).toFixed(2)
     : 0;
 
   return {

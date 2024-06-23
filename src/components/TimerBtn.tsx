@@ -4,6 +4,7 @@ import { PiClockAfternoonLight, PiPipeWrenchLight } from "react-icons/pi";
 import { twMerge } from "tailwind-merge";
 import useClaimHandler from "utils/useClaimHandler";
 import clsx from "clsx";
+import OPA from "assets/OPA.svg";
 
 const TimerButton: React.FC = () => {
   const { isButtonDisabled, loading, countdown, claimed, fetchDate } =
@@ -23,11 +24,11 @@ const TimerButton: React.FC = () => {
         "flex items-center gap-2 w-full justify-center py-4 !rounded-lg mb-0 relative ",
         isButtonDisabled || loading
           ? "!bg-[#1D1D1E]/50 !text-[#90ff46]"
-          : "!bg-white "
+          : "!bg-[#1D1D1E] "
       )}
     >
       {isButtonDisabled ? (
-        <span className="font-mono flex items-center gap-2 text-xs">
+        <span className="font-mono flex items-center gap-2 text-lg">
           <div
             className={clsx(
               "absolute left-0 top-0 h-full !bg-[#5a761e7e] z-[-1] !rounded-l-lg "
@@ -36,7 +37,7 @@ const TimerButton: React.FC = () => {
               width: `${percent}%`,
             }}
           ></div>
-          <PiClockAfternoonLight className="size-5" />
+          <PiClockAfternoonLight className="size-7" />
           {"Claim in :"}
           {` ${Math.floor(countdown! / 3600)
             .toString()
@@ -44,12 +45,14 @@ const TimerButton: React.FC = () => {
             .toString()
             .padStart(2, "0")}:${(countdown! % 60)
             .toString()
-            .padStart(2, "0")} fill / ${claimed} OPA`}
+            .padStart(2, "0")} `}
         </span>
       ) : (
-        <div className="flex items-center !text-black gap-2 text-xs">
-          <PiPipeWrenchLight className="size-5" />{" "}
-          {`Claim ${userInfo?.maxScore} OPA / Start mining`}
+        <div className="flex items-center  gap-2 text-lg">
+          <PiPipeWrenchLight className="size-7" />{" "}
+          {`Claim ${userInfo?.maxScore} `}
+          <img src={OPA} alt="" />
+          {` / Start mining`}
         </div>
       )}
     </Button>

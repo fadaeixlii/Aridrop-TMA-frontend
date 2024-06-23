@@ -6,6 +6,7 @@ import { Task, useTaskStore } from "../../Store/TaskStore";
 import { useUserId, useUserInfo } from "../../Store/TelegramStore";
 import api from "utils/axiosConfig";
 import { notifyError, notifySuccess } from "utils/constant";
+import OPA from "assets/OPA.svg";
 
 interface TaskItemProps {
   task: Task;
@@ -120,7 +121,7 @@ export default function TaskItem({ task }: TaskItemProps) {
   return (
     <div
       className={twMerge(
-        "rounded-2xl w-full bg-[#333333] border border-[#3D3D3D] p-3 text-white text-lg h-auto flex flex-col cursor-pointer",
+        "w-full newBox border border-[#3D3D3D] p-3 text-white text-lg h-auto flex flex-col cursor-pointer",
         task.isCompleted ? "opacity-30 cursor-not-allowed" : ""
       )}
       onClick={() => {
@@ -129,12 +130,15 @@ export default function TaskItem({ task }: TaskItemProps) {
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="bg-[#3D3D3D] p-2 rounded-lg flex items-center justify-center">
+          <span className=" p-2 rounded-lg flex items-center justify-center">
             <img src={task.image} alt="" className="size-12" />
           </span>
           <span className="text-md">{task.title}</span>
         </div>
-        <span className="text-[#AFEF28] text-xs">+{task.reward} OPL</span>
+        <div className="flex items-center gap-1">
+          <img src={OPA} alt="" className="size-3" />
+          <span>{task.reward}</span>
+        </div>
       </div>
       <div
         ref={contentRef}

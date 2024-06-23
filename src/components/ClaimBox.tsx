@@ -1,4 +1,5 @@
 import {
+  PiArrowRight,
   PiBatteryChargingVertical,
   PiBatteryChargingVerticalFill,
   PiCoinsLight,
@@ -45,28 +46,40 @@ const ClaimBox: React.FC<ClaimBoxProps> = ({ setActiveTab }) => {
 
   return (
     <div className="w-full flex flex-col h-full max-h-full items-start justify-between gap-10 rounded-2xl p-3 mb-24 z-[1]">
-      <div className="flex items-center gap-1 flex-wrap w-full">
-        <TelegramProfileImage telegramId={userInfo.telegramId} />
-        <div className=" text-white mx-2 truncate grow">{`${
-          userInfo?.firstName ?? ""
-        } ${userInfo?.lastName ?? ""}`}</div>
+      <div className="flex items-center gap-1 flex-wrap w-full justify-between">
+        <div
+          className="flex items-center gap-2"
+          onClick={() => {
+            setActiveTab("Referral");
+          }}
+        >
+          <TelegramProfileImage telegramId={userInfo.telegramId} />
+          <div className=" text-white mx-2 truncate grow">{`${
+            userInfo?.firstName ?? ""
+          } ${userInfo?.lastName ?? ""}`}</div>
+        </div>
         <span
-          className="bg-[#282C51]/30 border border-[#363B6C] flex items-center justify-center size-12 rounded-lg "
+          className="bg-[#282C51]/30 border border-[#363B6C] flex items-center flex-col justify-center  px-6 py-1 rounded-lg "
           onClick={() => {
             setActiveTab("Boost");
           }}
         >
-          <PiBatteryChargingVerticalFill className="size-[50%] text-[#45E89D]" />
+          <PiBatteryChargingVerticalFill className="size-4 text-[#45E89D]" />
+          <span className="text-white font-light text-xs ">boost</span>
         </span>
-        {/* {userInfo?.profitPerHour > 0 && (
-          <div className="mr-auto flex items-center">
-            {userInfo.profitPerHour}/Hour OPL
-          </div>
-        )} */}
       </div>
 
-      <div className="flex w-full justify-center items-center  ">
+      <div className="flex w-full justify-center items-center flex-col   ">
         <img src={userRank.icon} alt="" className="aspect-square w-4/5" />
+
+        <span className="flex items-center gap-2 text-slate-400 text-xl">
+          <span>{userRank.key}</span>
+          <PiArrowRight
+            onClick={() => {
+              setActiveTab("Ranks");
+            }}
+          />
+        </span>
       </div>
 
       {/* <div className="flex items-center gap-4 justify-center w-full">
