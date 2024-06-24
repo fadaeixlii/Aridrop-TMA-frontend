@@ -38,7 +38,7 @@ const BoostPage: React.FC<BoostPageProps> = () => {
   if (userInfo === null) return null;
 
   return (
-    <div className="h-full flex flex-col items-center justify-start  gap-4 ">
+    <div className="h-full flex flex-col items-center justify-between   pb-28">
       <div className=" p-4 flex flex-col items-center justify-center gap-2">
         <img src={Boost1} className="size-28" />
         <span className="text-4xl font-bold">
