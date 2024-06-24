@@ -12,10 +12,10 @@ const InvestingPage: React.FC<Props> = ({ back }) => {
   const { isConnected } = useAccount();
 
   return (
-    <div className="flex flex-col gap-3 w-full text-white py-8">
-      <Back back={back} />
+    <div className="flex flex-col gap-3 w-full text-white h-full items-center justify-center ">
+      <h1>Coming Soon!</h1>
 
-      <div className="flex items-center justify-between w-full">
+      {/* <div className="flex items-center justify-between w-full">
         <p className="">InvestingPage</p>
         <ConnectWallet />
       </div>
@@ -31,7 +31,7 @@ const InvestingPage: React.FC<Props> = ({ back }) => {
         </>
       ) : (
         <></>
-      )}
+      )} */}
     </div>
   );
 };

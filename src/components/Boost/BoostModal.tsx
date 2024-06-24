@@ -8,6 +8,7 @@ import Button from "components/common/Button";
 import OPA from "assets/OPA.svg";
 import { notifyError, notifySuccess } from "utils/constant";
 import api from "utils/axiosConfig";
+import { formatCurrency } from "utils/number";
 
 export interface IBoostModalProps {
   type: "timeLimit" | "maxScore";
@@ -47,7 +48,7 @@ export function BoostModal(props: IBoostModalProps) {
   if (!maxScore || !timeLimit || !userInfo) return null;
 
   return (
-    <div className="flex items-center flex-col text-white gap-4 justify-between w-full">
+    <div className="flex items-center flex-col text-white gap-4 justify-between w-full h-full">
       <h2 className="text-2xl">
         {type === "maxScore" ? "Opal Stone" : "Lighting Speed"}
       </h2>
@@ -65,7 +66,9 @@ export function BoostModal(props: IBoostModalProps) {
               ? userInfo?.maxScore + maxScore?.effect
               : userInfo?.timeLimit - timeLimit?.effect
           }
-          level={type === "maxScore" ? maxScore?.order : timeLimit?.order}
+          level={
+            type === "maxScore" ? maxScore?.order + 1 : timeLimit?.order + 1
+          }
         />
         <PiArrowCircleUpFill className="text-white size-8" />
         <BoostItemModal
@@ -73,21 +76,24 @@ export function BoostModal(props: IBoostModalProps) {
           boostEffect={
             type === "maxScore" ? userInfo?.maxScore : userInfo?.timeLimit
           }
-          level={
-            type === "maxScore" ? maxScore?.order - 1 : timeLimit?.order - 1
-          }
+          level={type === "maxScore" ? maxScore?.order : timeLimit?.order}
         />
+      </div>
+      <div className="flex items-center gap-2 my-4 mt-6">
+        <img src={OPA} alt="opa" className="size-9" />
+        <span className="text-2xl">
+          {type === "maxScore"
+            ? formatCurrency(maxScore.price)
+            : formatCurrency(timeLimit.price)}
+        </span>
       </div>
       <Button
         onClick={handleClick}
-        className="!bg-[#00B964FC] w-full mt-4 flex items-center justify-center"
+        className="!bg-[#00B964FC] w-full  flex items-center justify-center"
         loading={loading}
         disabled={loading}
       >
-        {`Upgrade for ${
-          type === "maxScore" ? maxScore.price : timeLimit.price
-        } `}
-        <img src={OPA} alt="opa" />
+        {`Upgrade`}
       </Button>
     </div>
   );

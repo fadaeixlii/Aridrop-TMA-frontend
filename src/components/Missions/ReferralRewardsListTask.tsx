@@ -1,8 +1,7 @@
 import { useUserId, useUserInfo } from "Store/TelegramStore";
 import * as React from "react";
 import { LeaguesReferralTaskItem } from "./LeaguesReferralTaskItem";
-import OPA from "assets/OPA.svg";
-import { notifyError, notifySuccess } from "utils/constant";
+import { getInfoInvite, notifyError, notifySuccess } from "utils/constant";
 import api from "utils/axiosConfig";
 import { useReferralRewardStore } from "Store/ReferralRewardsStore";
 
@@ -38,7 +37,8 @@ export function ReferralRewardsListTask(props: IReferralRewardsListTaskProps) {
       {referralRewards.map((referralReward) => (
         <LeaguesReferralTaskItem
           key={referralReward.title}
-          icon={OPA}
+          score={`${referralReward.referralsNeeded} ref`}
+          icon={getInfoInvite(referralReward.referralsNeeded).icon}
           onClaim={async () => {
             await handleVerifyTask(userId.userId, referralReward.id);
           }}

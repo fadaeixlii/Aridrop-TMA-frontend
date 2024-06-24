@@ -107,7 +107,7 @@ function App() {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <div className="w-full p-0 bg-[#1D1D1E] h-[100vh] max-h-screen  z-10 flex items-center justify-center overflow-auto  overflow-x-hidden relative">
+        <div className="w-full p-0 bg-[#1D1D1E] h-[100vh] max-h-screen  z-10 flex items-center justify-center overflow-hidden  overflow-x-hidden relative">
           <Toaster />
           <div className="gradient"></div>
           <div className="max-w-[450px] relative h-[100vh] px-2 w-full">

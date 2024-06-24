@@ -54,7 +54,7 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
     };
   }, [ref, inView, from, to, animationOptions]);
 
-  return <span ref={ref} className="!font-mono" />;
+  return <span ref={ref} className="! " />;
 };
 
 export default AnimatedCounter;

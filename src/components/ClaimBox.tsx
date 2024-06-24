@@ -1,13 +1,5 @@
-import {
-  PiArrowRight,
-  PiBatteryChargingVertical,
-  PiBatteryChargingVerticalFill,
-  PiCoinsLight,
-  PiSpeedometerLight,
-} from "react-icons/pi";
-import CoinIcon from "../assets/CoinIcon.svg";
-import Button from "./common/Button";
-import AnimatedCounter from "./common/AnimatedNumber";
+import { PiArrowRight } from "react-icons/pi";
+import Boost2 from "assets/boost2.svg";
 import { useUserInfo } from "../Store/TelegramStore";
 import { useEffect, useMemo, useState } from "react";
 import { getUserRankInfo, RankInfo } from "../utils/constant";
@@ -59,18 +51,18 @@ const ClaimBox: React.FC<ClaimBoxProps> = ({ setActiveTab }) => {
           } ${userInfo?.lastName ?? ""}`}</div>
         </div>
         <span
-          className="bg-[#282C51]/30 border border-[#363B6C] flex items-center flex-col justify-center  px-6 py-1 rounded-lg "
+          className="newBox flex items-center justify-between gap-3 px-2 py-1 pr-3  rounded-lg "
           onClick={() => {
             setActiveTab("Boost");
           }}
         >
-          <PiBatteryChargingVerticalFill className="size-4 text-[#45E89D]" />
-          <span className="text-white font-light text-xs ">boost</span>
+          <img src={Boost2} className="size-8 text-[#45E89D]" />
+          <span className="text-white font-light text-xs ">Boost</span>
         </span>
       </div>
 
-      <div className="flex w-full justify-center items-center flex-col   ">
-        <img src={userRank.icon} alt="" className="aspect-square w-4/5" />
+      <div className="flex w-full justify-center items-center flex-col gap-4   ">
+        <img src={userRank.icon} alt="" className="aspect-square w-2/3 " />
 
         <span className="flex items-center gap-2 text-slate-400 text-xl">
           <span>{userRank.key}</span>

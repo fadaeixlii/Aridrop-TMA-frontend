@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, MouseEvent } from "react";
+import { useState, useRef, MouseEvent } from "react";
 import Button from "./Button";
 import { twMerge } from "tailwind-merge";
 import { initUtils } from "@tma.js/sdk";
@@ -7,6 +7,7 @@ import { useUserId, useUserInfo } from "../../Store/TelegramStore";
 import api from "utils/axiosConfig";
 import { notifyError, notifySuccess } from "utils/constant";
 import OPA from "assets/OPA.svg";
+import { formatNumber } from "utils/number";
 
 interface TaskItemProps {
   task: Task;
@@ -17,11 +18,10 @@ export default function TaskItem({ task }: TaskItemProps) {
   const { fetchData: fetchTasks } = useTaskStore();
   const { fetchData } = useUserInfo();
 
-  const utils = initUtils();
+  // const utils = initUtils();
 
-  const [open, setOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
-  const [contentHeight, setContentHeight] = useState("0px");
+  // const [contentHeight, setContentHeight] = useState("0px");
   const [loading, setLoading] = useState<boolean[]>(
     Array(task.miniTasks.length).fill(false)
   );
@@ -30,11 +30,11 @@ export default function TaskItem({ task }: TaskItemProps) {
   );
   const [claimLoading, setClaimLoading] = useState(false);
 
-  useEffect(() => {
-    if (contentRef.current) {
-      setContentHeight(open ? `${contentRef.current.scrollHeight}px` : "0px");
-    }
-  }, [open]);
+  // useEffect(() => {
+  //   if (contentRef.current) {
+  //     setContentHeight(open ? `${contentRef.current.scrollHeight}px` : "0px");
+  //   }
+  // }, [open]);
 
   const handleMiniTaskClick = (index: number, link: string, type: string) => {
     setLoading((prevLoading) => {
@@ -46,8 +46,8 @@ export default function TaskItem({ task }: TaskItemProps) {
     setTimeout(() => {
       console.log(link);
       if (link) {
-        if (type === "telegram") utils.openTelegramLink(link);
-        else utils.openLink(link);
+        // if (type === "telegram") utils.openTelegramLink(link);
+        // else utils.openLink(link);
       }
 
       setLoading((prevLoading) => {
@@ -124,9 +124,6 @@ export default function TaskItem({ task }: TaskItemProps) {
         "w-full newBox border border-[#3D3D3D] p-3 text-white text-lg h-auto flex flex-col cursor-pointer",
         task.isCompleted ? "opacity-30 cursor-not-allowed" : ""
       )}
-      onClick={() => {
-        if (!task.isCompleted) setOpen(!open);
-      }}
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -137,12 +134,11 @@ export default function TaskItem({ task }: TaskItemProps) {
         </div>
         <div className="flex items-center gap-1">
           <img src={OPA} alt="" className="size-3" />
-          <span>{task.reward}</span>
+          <span>{formatNumber(task.reward)}</span>
         </div>
       </div>
       <div
         ref={contentRef}
-        style={{ height: contentHeight }}
         className="overflow-hidden transition-all duration-300 ease-in-out"
       >
         <div className="pt-6 flex flex-col gap-4">

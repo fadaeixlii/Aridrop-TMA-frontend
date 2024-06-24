@@ -2,16 +2,18 @@ import * as React from "react";
 import OPA from "assets/OPA.svg";
 import Button from "components/common/Button";
 import { Progress } from "@/components/ui/progress";
+import { formatNumber } from "utils/number";
 export interface ILeaguesReferralTaskItemProps {
   icon: string;
   title: string;
   reward: number;
   progress: number;
+  score: string;
   onClaim: () => Promise<void>;
 }
 
 export function LeaguesReferralTaskItem(props: ILeaguesReferralTaskItemProps) {
-  const { icon, onClaim, progress, reward, title } = props;
+  const { icon, onClaim, progress, reward, title, score } = props;
 
   const [loading, setLoading] = React.useState(false);
   const [disabled, setDisabled] = React.useState(false);
@@ -25,7 +27,7 @@ export function LeaguesReferralTaskItem(props: ILeaguesReferralTaskItemProps) {
             <span>{title}</span>
             <div className="flex items-center gap-1">
               <img src={OPA} alt="" className="size-3" />
-              <span>{reward}</span>
+              <span>{formatNumber(reward)}</span>
             </div>
           </div>
           <Button
@@ -42,10 +44,13 @@ export function LeaguesReferralTaskItem(props: ILeaguesReferralTaskItemProps) {
             {disabled ? "Claimed" : "Claim"}
           </Button>
         </div>
-        <Progress
-          value={progress >= 100 ? 100 : progress}
-          className="w-full h-3"
-        />
+        <div className="w-full flex items-center gap-2">
+          <span className="shrink-0">{score}</span>
+          <Progress
+            value={progress >= 100 ? 100 : progress}
+            className="w-full h-3"
+          />
+        </div>
       </div>
     </div>
   );

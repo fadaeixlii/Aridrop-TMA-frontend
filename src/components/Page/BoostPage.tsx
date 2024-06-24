@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AnimatedCounter from "../common/AnimatedNumber";
 import { useUserId, useUserInfo } from "../../Store/TelegramStore";
 import BottomModal from "components/common/BottonModal";
-import TelegramProfileImage from "components/common/TelegramProfile";
+import Boost1 from "assets/boost1.svg";
 import OPA from "assets/OPA.svg";
 import Stone from "assets/Stone.svg";
 import Lighting from "assets/Lighting.svg";
@@ -10,6 +10,8 @@ import { BoostItem } from "components/Boost/BoostItem";
 import { useMaxScoreBoostStore } from "Store/MaxScoreBoost";
 import { useTimeLimitBoostStore } from "Store/timeLimitBoost";
 import { BoostModal } from "components/Boost/BoostModal";
+import { getInfoSpeed, getInfoStorage } from "utils/constant";
+import { formatCurrency } from "utils/number";
 
 interface BoostPageProps {
   back: () => void;
@@ -36,47 +38,56 @@ const BoostPage: React.FC<BoostPageProps> = () => {
   if (userInfo === null) return null;
 
   return (
-    <div className="h-full flex flex-col items-center justify-start mt-10 gap-4 py-8">
-      <div className=" p-4">
-        <TelegramProfileImage
-          telegramId={userInfo?.telegramId.toString() ?? ""}
-          className="size-28"
+    <div className="h-full flex flex-col items-center justify-start  gap-4 ">
+      <div className=" p-4 flex flex-col items-center justify-center gap-2">
+        <img src={Boost1} className="size-28" />
+        <span className="text-4xl font-bold">
+          <span>{formatCurrency(userInfo.storedScore)}</span>
+        </span>
+        <span className="text-[#9C9C9C] text-lg font-medium">
+          {(userInfo.maxScore / (userInfo.timeLimit / 60)).toFixed(2)} OPA per
+          hour
+        </span>
+      </div>
+      <div className=" p-4 flex flex-col items-center justify-center gap-2">
+        <span className="text-xl font-bold">Passive mining boosts</span>
+        <span className="text-[#9C9C9C] text-xs font-medium">
+          Upgrade storage and speed mine more
+        </span>
+      </div>
+      <div className="w-full flex flex-col gap-4 px-4">
+        <BoostItem
+          desc="Increase the fill volume"
+          icon={getInfoStorage(maxScore?.order ?? 1).icon}
+          onClick={() => {
+            setType("maxScore");
+            setShowModal(true);
+          }}
+          title="Opal Stone"
+          nextLevel={maxScore?.order}
+          nextPrice={maxScore?.price}
         />
-        <div className="flex items-center gap-3 flex-wrap justify-center my-2">
-          <div className="font-bold">{`${userInfo?.firstName ?? ""} ${
-            userInfo?.lastName ?? ""
-          }`}</div>
-        </div>
-        <div className="text-center font-extralight text-4xl py-4 font-mono flex items-center gap-1 justify-center">
-          <AnimatedCounter
-            from={userInfo.storedScore || 0}
-            to={userInfo.storedScore}
-          />
-          <img src={OPA} alt="" className="size-8" />
+        <BoostItem
+          desc="Decrease time to fill"
+          icon={getInfoSpeed(timeLimit?.order ?? 1).icon}
+          onClick={() => {
+            setType("timeLimit");
+            setShowModal(true);
+          }}
+          title="Lightning speed"
+          nextLevel={timeLimit?.order}
+          nextPrice={timeLimit?.price}
+        />
+      </div>
+      <div className=" p-4 flex flex-col items-center justify-center gap-2 px-4 w-full mt-5">
+        <span className="text-xl font-bold">Robot mining boosts</span>
+        <span className="text-[#9C9C9C] text-xs font-medium">
+          Auto your mining
+        </span>
+        <div className="flex items-center gap-4 justify-center newBox p-5 text-white w-full ">
+          <span>Coming Soon!</span>
         </div>
       </div>
-      <BoostItem
-        desc="Increase the fill volume"
-        icon={Stone}
-        onClick={() => {
-          setType("maxScore");
-          setShowModal(true);
-        }}
-        title="Opal Stone"
-        nextLevel={maxScore?.order}
-        nextPrice={maxScore?.price}
-      />
-      <BoostItem
-        desc="Decrease time to fill"
-        icon={Lighting}
-        onClick={() => {
-          setType("timeLimit");
-          setShowModal(true);
-        }}
-        title="Lightning speed"
-        nextLevel={timeLimit?.order}
-        nextPrice={timeLimit?.price}
-      />
 
       <BottomModal showModal={showModal} setShowModal={setShowModal}>
         {type ? (

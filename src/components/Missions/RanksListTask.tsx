@@ -2,9 +2,9 @@ import { useUserId, useUserInfo } from "Store/TelegramStore";
 import { useRankStore } from "Store/ranksStore";
 import * as React from "react";
 import { LeaguesReferralTaskItem } from "./LeaguesReferralTaskItem";
-import OPA from "assets/OPA.svg";
-import { notifyError, notifySuccess } from "utils/constant";
+import { getInfoRank, notifyError, notifySuccess } from "utils/constant";
 import api from "utils/axiosConfig";
+import { formatNumber } from "utils/number";
 
 export interface IRanksListTaskProps {}
 
@@ -38,7 +38,8 @@ export function RanksListTask(props: IRanksListTaskProps) {
       {ranks.map((rank) => (
         <LeaguesReferralTaskItem
           key={rank.name}
-          icon={OPA}
+          score={formatNumber(rank.maxScore)}
+          icon={getInfoRank(rank.name).icon}
           onClaim={async () => {
             await handleVerifyTask(userId.userId, rank.id);
           }}

@@ -51,9 +51,9 @@ const ReferralPage: React.FC<Props> = () => {
             }`
           );
         }}
-        className="w-full bg-[#1D1D1E] "
+        className="w-full !bg-[#00B964FC] text-white "
       >
-        <CopyIcon /> Copy invite link
+        Copy invite link
       </Button>
     </div>
   );

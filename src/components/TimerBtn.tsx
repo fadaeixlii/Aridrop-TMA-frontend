@@ -24,11 +24,11 @@ const TimerButton: React.FC = () => {
         "flex items-center gap-2 w-full justify-center py-4 !rounded-lg mb-0 relative ",
         isButtonDisabled || loading
           ? "!bg-[#1D1D1E]/50 !text-[#90ff46]"
-          : "!bg-[#1D1D1E] "
+          : "!bg-[#fff] text-black"
       )}
     >
       {isButtonDisabled ? (
-        <span className="font-mono flex items-center gap-2 text-lg">
+        <span className="  flex items-center gap-2 text-lg">
           <div
             className={clsx(
               "absolute left-0 top-0 h-full !bg-[#5a761e7e] z-[-1] !rounded-l-lg "
@@ -37,7 +37,7 @@ const TimerButton: React.FC = () => {
               width: `${percent}%`,
             }}
           ></div>
-          <PiClockAfternoonLight className="size-7" />
+
           {"Claim in :"}
           {` ${Math.floor(countdown! / 3600)
             .toString()
@@ -48,12 +48,7 @@ const TimerButton: React.FC = () => {
             .padStart(2, "0")} `}
         </span>
       ) : (
-        <div className="flex items-center  gap-2 text-lg">
-          <PiPipeWrenchLight className="size-7" />{" "}
-          {`Claim ${userInfo?.maxScore} `}
-          <img src={OPA} alt="" />
-          {` / Start mining`}
-        </div>
+        <div className="flex items-center  gap-2 text-lg">Start Mining</div>
       )}
     </Button>
   );

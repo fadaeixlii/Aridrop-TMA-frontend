@@ -10,6 +10,7 @@ import TelegramProfileImage from "components/common/TelegramProfile";
 import { RanksListTask } from "components/Missions/RanksListTask";
 import { ReferralRewardsListTask } from "components/Missions/ReferralRewardsListTask";
 import OPA from "assets/OPA.svg";
+import { formatCurrency } from "utils/number";
 
 interface Props {
   back: () => void;
@@ -32,11 +33,8 @@ const MissionsPage: React.FC<Props> = ({ back }) => {
             userInfo?.lastName ?? ""
           }`}</div>
         </div>
-        <div className="text-center font-extralight text-4xl py-4 font-mono flex items-center gap-1 justify-center">
-          <AnimatedCounter
-            from={userInfo.storedScore || 0}
-            to={userInfo.storedScore}
-          />
+        <div className="text-center font-extralight text-4xl py-4   flex items-center gap-1 justify-center">
+          <span>{formatCurrency(userInfo.storedScore)}</span>
           <img src={OPA} alt="" className="size-8" />
         </div>
       </div>
