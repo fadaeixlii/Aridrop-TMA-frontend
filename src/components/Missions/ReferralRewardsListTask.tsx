@@ -10,7 +10,7 @@ export interface IReferralRewardsListTaskProps {}
 export function ReferralRewardsListTask(props: IReferralRewardsListTaskProps) {
   const { fetchData, referralRewards } = useReferralRewardStore();
   const { userId } = useUserId();
-  const { userInfo } = useUserInfo();
+  const { userInfo, fetchData: fetchUserInfo } = useUserInfo();
 
   React.useEffect(() => {
     if (userId) fetchData(userId?.userId);
@@ -22,6 +22,10 @@ export function ReferralRewardsListTask(props: IReferralRewardsListTaskProps) {
         userId,
         rewardId,
       });
+      if (userId) {
+        fetchData(userId);
+        fetchUserInfo(userId);
+      }
       console.log(response);
       notifySuccess("Claimed successfully");
     } catch (error) {

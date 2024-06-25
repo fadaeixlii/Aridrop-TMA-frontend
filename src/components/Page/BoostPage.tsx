@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-import AnimatedCounter from "../common/AnimatedNumber";
 import { useUserId, useUserInfo } from "../../Store/TelegramStore";
 import BottomModal from "components/common/BottonModal";
 import Boost1 from "assets/boost1.svg";
-import OPA from "assets/OPA.svg";
-import Stone from "assets/Stone.svg";
-import Lighting from "assets/Lighting.svg";
 import { BoostItem } from "components/Boost/BoostItem";
 import { useMaxScoreBoostStore } from "Store/MaxScoreBoost";
 import { useTimeLimitBoostStore } from "Store/timeLimitBoost";

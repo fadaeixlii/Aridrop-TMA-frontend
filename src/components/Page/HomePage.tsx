@@ -6,7 +6,7 @@ interface Props {
 
 const HomePage: React.FC<Props> = ({ setActiveTab }) => {
   return (
-    <div className="flex flex-col gap-5 w-full h-screen max-h-screen o">
+    <div className="flex flex-col justify-between w-full h-screen max-h-screen ">
       <ClaimBox setActiveTab={setActiveTab} />
     </div>
   );

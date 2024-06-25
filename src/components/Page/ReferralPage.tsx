@@ -5,11 +5,12 @@ import { useMemo } from "react";
 import { getUserRankInfo } from "../../utils/constant";
 import TelegramProfileImage from "../common/TelegramProfile";
 import Button from "components/common/Button";
-import { CopyIcon } from "lucide-react";
+import { initUtils } from "@tma.js/sdk";
 
 interface Props {
   back: () => void;
 }
+const utils = initUtils();
 
 const ReferralPage: React.FC<Props> = () => {
   const { userInfo } = useUserInfo();
@@ -45,6 +46,12 @@ const ReferralPage: React.FC<Props> = () => {
       </div>
       <Button
         onClick={() => {
+          utils.shareURL(
+            `t.me/DemoAirDropMegaWallet1_bot?start=${
+              userInfo?.referralCode ?? ""
+            }`,
+            "Invite your friends and get bonuses for each invited friend!"
+          );
           copyHelper(
             `t.me/DemoAirDropMegaWallet1_bot?start=${
               userInfo?.referralCode ?? ""
@@ -53,7 +60,7 @@ const ReferralPage: React.FC<Props> = () => {
         }}
         className="w-full !bg-[#00B964FC] text-white "
       >
-        Copy invite link
+        Invite, mine 20% more
       </Button>
     </div>
   );

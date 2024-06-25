@@ -37,7 +37,7 @@ const ClaimBox: React.FC<ClaimBoxProps> = ({ setActiveTab }) => {
   if (!userInfo) return null;
 
   return (
-    <div className="w-full flex flex-col h-full max-h-full items-start justify-between gap-10 rounded-2xl p-3 mb-24 z-[1]">
+    <div className="w-full flex flex-col h-full max-h-full items-start justify-between  p-3 pb-28 z-[1]">
       <div className="flex items-center gap-1 flex-wrap w-full justify-between">
         <div
           className="flex items-center gap-2"

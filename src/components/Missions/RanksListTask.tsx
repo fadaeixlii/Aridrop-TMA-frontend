@@ -11,7 +11,7 @@ export interface IRanksListTaskProps {}
 export function RanksListTask(props: IRanksListTaskProps) {
   const { fetchData, ranks } = useRankStore();
   const { userId } = useUserId();
-  const { userInfo } = useUserInfo();
+  const { userInfo, fetchData: fetchUserInfo } = useUserInfo();
 
   React.useEffect(() => {
     if (userId) fetchData(userId?.userId);
@@ -23,6 +23,11 @@ export function RanksListTask(props: IRanksListTaskProps) {
         userId,
         rankId,
       });
+      if (userId) {
+        fetchData(userId);
+        fetchUserInfo(userId);
+      }
+
       console.log(response);
       notifySuccess("Claimed successfully");
     } catch (error) {

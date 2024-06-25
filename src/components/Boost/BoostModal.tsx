@@ -17,13 +17,13 @@ export interface IBoostModalProps {
 
 export function BoostModal(props: IBoostModalProps) {
   const { type, close } = props;
-  const { userInfo } = useUserInfo();
+  const { userInfo, fetchData } = useUserInfo();
   const { userId } = useUserId();
 
   const [loading, setLoading] = React.useState(false);
 
-  const { maxScore } = useMaxScoreBoostStore();
-  const { timeLimit } = useTimeLimitBoostStore();
+  const { maxScore, fetchData: maxScoreFetch } = useMaxScoreBoostStore();
+  const { timeLimit, fetchData: timeLimitFetch } = useTimeLimitBoostStore();
 
   const handleClick = async () => {
     setLoading(true);
@@ -34,6 +34,11 @@ export function BoostModal(props: IBoostModalProps) {
         boostId: type === "maxScore" ? maxScore?.id : timeLimit?.id,
       });
       console.log(response);
+      if (userId) {
+        fetchData(userId?.userId);
+        maxScoreFetch(userId?.userId);
+        timeLimitFetch(userId?.userId);
+      }
 
       notifySuccess("Upgrade successfully");
     } catch (error) {

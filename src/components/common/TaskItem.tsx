@@ -1,24 +1,24 @@
 import { useState, useRef, MouseEvent } from "react";
 import Button from "./Button";
 import { twMerge } from "tailwind-merge";
-import { initUtils } from "@tma.js/sdk";
 import { Task, useTaskStore } from "../../Store/TaskStore";
 import { useUserId, useUserInfo } from "../../Store/TelegramStore";
 import api from "utils/axiosConfig";
 import { notifyError, notifySuccess } from "utils/constant";
 import OPA from "assets/OPA.svg";
 import { formatNumber } from "utils/number";
+import { initUtils } from "@tma.js/sdk";
 
 interface TaskItemProps {
   task: Task;
 }
 
+const utils = initUtils();
+
 export default function TaskItem({ task }: TaskItemProps) {
   const { userId } = useUserId();
   const { fetchData: fetchTasks } = useTaskStore();
   const { fetchData } = useUserInfo();
-
-  const utils = initUtils();
 
   const contentRef = useRef<HTMLDivElement>(null);
   // const [contentHeight, setContentHeight] = useState("0px");
@@ -43,26 +43,23 @@ export default function TaskItem({ task }: TaskItemProps) {
       return newLoading;
     });
 
-    setTimeout(() => {
-      console.log(link);
-      if (link) {
-        if (type === "telegram") utils.openTelegramLink(link);
-        else utils.openLink(link);
-      }
+    if (link) {
+      if (type === "telegram") utils.openTelegramLink(link);
+      else utils.openLink(link);
+    }
 
-      setLoading((prevLoading) => {
-        const newLoading = [...prevLoading];
-        newLoading[index] = false;
-        return newLoading;
-      });
+    setLoading((prevLoading) => {
+      const newLoading = [...prevLoading];
+      newLoading[index] = false;
+      return newLoading;
+    });
 
-      setCompleted((prevCompleted) => {
-        const newCompleted = [...prevCompleted];
-        newCompleted[index] =
-          task.miniTasks[index].type === "telegram" ? "check" : "true";
-        return newCompleted;
-      });
-    }, 5000);
+    setCompleted((prevCompleted) => {
+      const newCompleted = [...prevCompleted];
+      newCompleted[index] =
+        task.miniTasks[index].type === "telegram" ? "check" : "true";
+      return newCompleted;
+    });
   };
 
   const handleCheck = async (index: number) => {

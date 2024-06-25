@@ -55,8 +55,7 @@ function App() {
   const fetchInitData = async () => {
     // Check if the Telegram WebApp SDK is loaded
     if (WebApp) {
-      const tg = WebApp as any; // Replace with proper typing if available
-      tg.ready();
+      const tg = WebApp;
       tg.expand();
       if (tg.MainButton) {
         tg.MainButton.hide();
@@ -66,11 +65,17 @@ function App() {
       tg.themeParams.bg_color = "#1D1D1E";
       tg.themeParams.header_bg_color = "#1D1D1E";
       tg.themeParams.section_bg_color = "#1D1D1E";
+      tg.enableClosingConfirmation();
 
       const user = tg.initDataUnsafe?.user ?? Data;
-      setTelegramUserInfo(user);
       if (user) {
-        fetchUserId(user.id, user.username, user.first_name, user.last_name);
+        setTelegramUserInfo(user as any);
+        fetchUserId(
+          String(user.id),
+          user?.username ?? "",
+          user?.first_name ?? "",
+          user?.last_name ?? ""
+        );
       }
     } else {
       console.error("Telegram Web App SDK not found");
