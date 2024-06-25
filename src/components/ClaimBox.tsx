@@ -62,7 +62,11 @@ const ClaimBox: React.FC<ClaimBoxProps> = ({ setActiveTab }) => {
       </div>
 
       <div className="flex w-full justify-center items-center flex-col gap-4   ">
-        <img src={userRank.icon} alt="" className="aspect-square w-2/3 " />
+        <img
+          src={userRank.icon}
+          alt=""
+          className="aspect-square w-2/3 shrink "
+        />
 
         <span className="flex items-center gap-2 text-slate-400 text-xl">
           <span>{userRank.key}</span>
