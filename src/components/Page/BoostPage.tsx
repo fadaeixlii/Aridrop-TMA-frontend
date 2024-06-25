@@ -57,7 +57,7 @@ const BoostPage: React.FC<BoostPageProps> = () => {
           icon={getInfoStorage(maxScore?.order ?? 1).icon}
           onClick={() => {
             setType("maxScore");
-            setShowModal(true);
+            if (maxScore) setShowModal(true);
           }}
           title="Opal Stone"
           nextLevel={maxScore?.order}
@@ -68,7 +68,7 @@ const BoostPage: React.FC<BoostPageProps> = () => {
           icon={getInfoSpeed(timeLimit?.order ?? 1).icon}
           onClick={() => {
             setType("timeLimit");
-            setShowModal(true);
+            if (timeLimit) setShowModal(true);
           }}
           title="Lightning speed"
           nextLevel={timeLimit?.order}

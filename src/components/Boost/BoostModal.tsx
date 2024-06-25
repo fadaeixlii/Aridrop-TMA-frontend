@@ -50,7 +50,12 @@ export function BoostModal(props: IBoostModalProps) {
     }
   };
 
-  if (!maxScore || !timeLimit || !userInfo) return null;
+  if (
+    (type === "maxScore" && !maxScore) ||
+    (type === "timeLimit" && !timeLimit) ||
+    !userInfo
+  )
+    return null;
 
   return (
     <div className="flex items-center flex-col text-white gap-4 justify-between w-full h-full">
@@ -68,11 +73,21 @@ export function BoostModal(props: IBoostModalProps) {
           type={type}
           boostEffect={
             type === "maxScore"
-              ? userInfo?.maxScore + maxScore?.effect
-              : userInfo?.timeLimit - timeLimit?.effect
+              ? maxScore
+                ? userInfo?.maxScore + maxScore?.effect
+                : 0
+              : timeLimit
+              ? userInfo?.timeLimit - timeLimit?.effect
+              : 0
           }
           level={
-            type === "maxScore" ? maxScore?.order + 1 : timeLimit?.order + 1
+            type === "maxScore"
+              ? maxScore
+                ? maxScore?.order
+                : 0 + 1
+              : timeLimit
+              ? timeLimit?.order
+              : 0 + 1
           }
         />
         <PiArrowCircleUpFill className="text-white size-8" />
@@ -81,15 +96,17 @@ export function BoostModal(props: IBoostModalProps) {
           boostEffect={
             type === "maxScore" ? userInfo?.maxScore : userInfo?.timeLimit
           }
-          level={type === "maxScore" ? maxScore?.order : timeLimit?.order}
+          level={
+            type === "maxScore" ? maxScore?.order ?? 0 : timeLimit?.order ?? 0
+          }
         />
       </div>
       <div className="flex items-center gap-2 my-4 mt-6">
         <img src={OPA} alt="opa" className="size-9" />
         <span className="text-2xl">
           {type === "maxScore"
-            ? formatCurrency(maxScore.price)
-            : formatCurrency(timeLimit.price)}
+            ? formatCurrency(maxScore ? maxScore.price : 0)
+            : formatCurrency(timeLimit ? timeLimit.price : 0)}
         </span>
       </div>
       <Button
