@@ -82,12 +82,8 @@ export function BoostModal(props: IBoostModalProps) {
           }
           level={
             type === "maxScore"
-              ? maxScore
-                ? maxScore?.order
-                : 0 + 1
-              : timeLimit
-              ? timeLimit?.order
-              : 0 + 1
+              ? (maxScore ? maxScore?.order : 0) + 1
+              : (timeLimit ? timeLimit?.order : 0) + 1
           }
         />
         <PiArrowCircleUpFill className="text-white size-8" />
