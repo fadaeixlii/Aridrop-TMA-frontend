@@ -46,17 +46,12 @@ const ReferralPage: React.FC<Props> = () => {
       </div>
       <Button
         onClick={() => {
-          utils.shareURL(
-            `t.me/DemoAirDropMegaWallet1_bot?start=${
+          utils.openTelegramLink(
+            `https://t.me/share/url?url=${`https://t.me/OpaliFibot?start=${
               userInfo?.referralCode ?? ""
-            }`,
-            "Invite your friends and get bonuses for each invited friend!"
+            }`}&text=${"Invite your friends and get bonuses for each invited friend!"}`
           );
-          copyHelper(
-            `t.me/DemoAirDropMegaWallet1_bot?start=${
-              userInfo?.referralCode ?? ""
-            }`
-          );
+          copyHelper(`t.me/OpaliFibot?start=${userInfo?.referralCode ?? ""}`);
         }}
         className="w-full !bg-[#00B964FC] text-white "
       >

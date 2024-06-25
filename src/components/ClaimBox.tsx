@@ -1,5 +1,5 @@
 import { PiArrowRight } from "react-icons/pi";
-import Boost2 from "assets/boost2.svg";
+import Boost2 from "assets/boost1.svg";
 import { useUserInfo } from "../Store/TelegramStore";
 import { useEffect, useMemo, useState } from "react";
 import { getUserRankInfo, RankInfo } from "../utils/constant";
