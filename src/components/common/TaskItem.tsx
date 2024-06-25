@@ -71,7 +71,7 @@ export default function TaskItem({ task }: TaskItemProps) {
 
     try {
       const response = await api.post("/verify-task", {
-        userId: userId,
+        userId: userId?.userId,
         taskId: task.id,
         miniTaskIndex: index,
       });
@@ -103,7 +103,9 @@ export default function TaskItem({ task }: TaskItemProps) {
 
     setClaimLoading(true);
     try {
-      const response = await api.post(`/tasks/complete/${userId}/${task.id}`);
+      const response = await api.post(
+        `/tasks/complete/${userId?.userId}/${task.id}`
+      );
       console.log(response);
       notifySuccess("Task completed 🎁");
     } catch (error) {

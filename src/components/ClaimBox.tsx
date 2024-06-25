@@ -72,7 +72,7 @@ const ClaimBox: React.FC<ClaimBoxProps> = ({ setActiveTab }) => {
           <span>{userRank.key}</span>
           <PiArrowRight
             onClick={() => {
-              setActiveTab("Ranks");
+              // setActiveTab("Ranks");
             }}
           />
         </span>
