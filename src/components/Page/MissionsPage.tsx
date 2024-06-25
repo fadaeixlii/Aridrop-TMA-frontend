@@ -32,23 +32,19 @@ const MissionsPage: React.FC<Props> = ({ back }) => {
 
   return (
     <div className="h-full flex flex-col items-center justify-start mt-4 gap-4 text-white pb-28">
-      <div className="flex w-full justify-center items-center flex-col gap-4   ">
+      <div className="flex w-full justify-center items-center flex-col gap-2   ">
         <img
           src={userRank.icon}
           alt=""
-          className="aspect-square w-[50%] shrink "
+          className="aspect-square size-28 shrink "
         />
-        <div className="text-center font-extralight text-4xl py-4   flex items-center gap-1 justify-center">
+        <div className="text-center font-extralight text-4xl py-3   flex items-center gap-1 justify-center">
           <span>{formatCurrency(userInfo.storedScore)}</span>
           <img src={OPA} alt="" className="size-8" />
         </div>
         <span className="flex items-center gap-2 text-slate-400 text-lg">
           <span>{userRank.key}</span>
-          <PiArrowRight
-            onClick={() => {
-              // setActiveTab("Ranks");
-            }}
-          />
+          <PiArrowRight onClick={() => {}} />
         </span>
       </div>
       <div className="grow w-full overflow-scroll flex flex-col gap-2">
