@@ -48,7 +48,9 @@ const MissionsPage: React.FC<Props> = ({ back }) => {
           <TabsContent value="special" className="flex flex-col w-full gap-2">
             {tasks ? (
               !loadingTask ? (
-                tasks.map((task, index) => <TaskItem task={task} key={index} />)
+                tasks
+                  .filter((task) => !task.isCompleted)
+                  .map((task, index) => <TaskItem task={task} key={index} />)
               ) : (
                 <BounceLoading />
               )
