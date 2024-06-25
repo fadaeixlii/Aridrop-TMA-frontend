@@ -65,10 +65,10 @@ const ClaimBox: React.FC<ClaimBoxProps> = ({ setActiveTab }) => {
         <img
           src={userRank.icon}
           alt=""
-          className="aspect-square w-2/3 shrink "
+          className="aspect-square w-[50%] shrink "
         />
 
-        <span className="flex items-center gap-2 text-slate-400 text-xl">
+        <span className="flex items-center gap-2 text-slate-400 text-lg">
           <span>{userRank.key}</span>
           <PiArrowRight
             onClick={() => {
