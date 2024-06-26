@@ -54,7 +54,7 @@ const BoostPage: React.FC<BoostPageProps> = () => {
       <div className="w-full flex flex-col gap-4 px-4">
         <BoostItem
           desc="Increase the fill volume"
-          icon={getInfoStorage(maxScore?.order ?? 1).icon}
+          icon={getInfoStorage(maxScore?.order ?? 5).icon}
           onClick={() => {
             setType("maxScore");
             if (maxScore) setShowModal(true);
@@ -65,7 +65,7 @@ const BoostPage: React.FC<BoostPageProps> = () => {
         />
         <BoostItem
           desc="Decrease time to fill"
-          icon={getInfoSpeed(timeLimit?.order ?? 1).icon}
+          icon={getInfoSpeed(timeLimit?.order ?? 5).icon}
           onClick={() => {
             setType("timeLimit");
             if (timeLimit) setShowModal(true);

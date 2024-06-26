@@ -142,45 +142,50 @@ export const ranksInfo: RankInfo[] = [
   {
     key: "Golden Opal",
     icon: Rank2,
-    score: 5000,
+    score: 10000,
   },
   {
     key: "Koroit Opal",
     icon: Rank3,
-    score: 10000,
+    score: 100000,
   },
   {
     key: "Honey Opal",
     icon: Rank4,
-    score: 20000,
+    score: 500000,
   },
   {
     key: "Matrix Opal",
     icon: Rank5,
-    score: 50000,
+    score: 2000000,
   },
   {
     key: "Golden Fire Opal",
     icon: Rank6,
-    score: 100000,
+    score: 5000000,
   },
   {
     key: "Girasol Opal",
     icon: Rank7,
-    score: 200000,
+    score: 10000000,
   },
   {
     key: "Crystal Opal",
     icon: Rank8,
-    score: 500000,
+    score: 20000000,
   },
   {
     key: "Fire Opal",
     icon: Rank9,
-    score: 1000000,
+    score: 40000000,
   },
   {
     key: "Andamooka Opal",
+    icon: Rank10,
+    score: 100000000,
+  },
+  {
+    key: "Infinity Opal",
     icon: Rank10,
     score: Infinity,
   },

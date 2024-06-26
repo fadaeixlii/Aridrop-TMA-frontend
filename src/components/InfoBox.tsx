@@ -21,7 +21,7 @@ export function InfoBox(props: IInfoBoxProps) {
     if (userId) fetchData(userId?.userId);
   }, []);
 
-  if (!userInfo || !maxScore) return null;
+  if (!userInfo) return null;
 
   return (
     <div className="card-shine-effect px-3 py-3 flex items-start w-full justify-between text-white rounded-lg bg-[#2E2E2E]/60 border border-[#2E2E2E] backdrop-blur-sm">
@@ -42,7 +42,7 @@ export function InfoBox(props: IInfoBoxProps) {
         </div>
       </div>
       <img
-        src={getInfoStorage(maxScore?.order ?? 1).icon}
+        src={getInfoStorage(maxScore?.order ?? 5).icon}
         alt=""
         className="size-10 "
       />
