@@ -42,7 +42,7 @@ export function InfoBox(props: IInfoBoxProps) {
         </div>
       </div>
       <img
-        src={getInfoStorage(maxScore?.order ?? 5).icon}
+        src={getInfoStorage(maxScore?.order ?? 6).icon}
         alt=""
         className="size-10 "
       />
