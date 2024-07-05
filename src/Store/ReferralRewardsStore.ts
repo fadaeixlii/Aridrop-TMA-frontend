@@ -6,6 +6,7 @@ export interface IReferralReward {
   rewardValue: number;
   referralsNeeded: number;
   id: string;
+  isCompleted: boolean;
 }
 
 interface ReferralRewardStoreState {

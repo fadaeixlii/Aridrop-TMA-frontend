@@ -7,6 +7,7 @@ export interface IRank {
   maxScore: number;
   reward: number;
   id: string;
+  isCompleted: boolean;
 }
 
 interface RankStoreState {

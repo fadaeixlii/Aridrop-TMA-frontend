@@ -136,52 +136,54 @@ export default function TaskItem({ task }: TaskItemProps) {
           <span>{formatNumber(task.reward)}</span>
         </div>
       </div>
-      <div
-        ref={contentRef}
-        className="overflow-hidden transition-all duration-300 ease-in-out"
-      >
-        <div className="pt-6 flex flex-col gap-4">
-          {task.miniTasks.map((miniTask, index) => (
-            <div
-              className="flex items-center justify-between gap-2 w-full"
-              key={index}
-            >
-              <span className="text-sm">{miniTask.title}</span>
-              <Button
-                className="px-3 py-1.5 mb-0 min-w-16 !text-sm !bg-[#1D1D1E]"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (completed[index] === "false")
-                    handleMiniTaskClick(
-                      index,
-                      miniTask.link ?? "",
-                      miniTask.type ?? ""
-                    );
-                  else if (completed[index] === "check") {
-                    handleCheck(index);
-                  }
-                }}
-                disabled={completed[index] === "true"}
-                loading={loading[index]}
+      {task.isCompleted ? null : (
+        <div
+          ref={contentRef}
+          className="overflow-hidden transition-all duration-300 ease-in-out"
+        >
+          <div className="pt-6 flex flex-col gap-4">
+            {task.miniTasks.map((miniTask, index) => (
+              <div
+                className="flex items-center justify-between gap-2 w-full"
+                key={index}
               >
-                {completed[index] === "check"
-                  ? "check"
-                  : completed[index] === "true"
-                  ? "Done"
-                  : "Go"}
-              </Button>
-            </div>
-          ))}
-          <Button
-            className="px-3 py-1.5 mt-4 !text-sm !bg-[#1D1D1E]"
-            disabled={claimLoading || !allCompleted}
-            onClick={handleClickClaim}
-            loading={claimLoading}
-          >
-            Claim
-          </Button>
+                <span className="text-sm">{miniTask.title}</span>
+                <Button
+                  className="px-3 py-1.5 mb-0 min-w-16 !text-sm !bg-[#1D1D1E]"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (completed[index] === "false")
+                      handleMiniTaskClick(
+                        index,
+                        miniTask.link ?? "",
+                        miniTask.type ?? ""
+                      );
+                    else if (completed[index] === "check") {
+                      handleCheck(index);
+                    }
+                  }}
+                  disabled={completed[index] === "true"}
+                  loading={loading[index]}
+                >
+                  {completed[index] === "check"
+                    ? "check"
+                    : completed[index] === "true"
+                    ? "Done"
+                    : "Go"}
+                </Button>
+              </div>
+            ))}
+            <Button
+              className="px-3 py-1.5 mt-4 !text-sm !bg-[#1D1D1E]"
+              disabled={claimLoading || !allCompleted}
+              onClick={handleClickClaim}
+              loading={claimLoading}
+            >
+              Claim
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

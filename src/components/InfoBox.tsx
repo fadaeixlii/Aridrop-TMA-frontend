@@ -1,9 +1,6 @@
 import * as React from "react";
-import CoinIcon from "../assets/CoinIcon.svg";
 import { useUserId, useUserInfo } from "Store/TelegramStore";
-import AnimatedCounter from "./common/AnimatedNumber";
 import useClaimHandler from "utils/useClaimHandler";
-import OPA from "assets/OPA.svg";
 import { formatNumber } from "utils/number";
 import { getInfoStorage } from "utils/constant";
 import { useMaxScoreBoostStore } from "Store/MaxScoreBoost";
@@ -15,7 +12,7 @@ export function InfoBox(props: IInfoBoxProps) {
   const { userId } = useUserId();
 
   const { claimed } = useClaimHandler();
-  const { maxScore, fetchData } = useMaxScoreBoostStore();
+  const { maxScore, fetchData, loading } = useMaxScoreBoostStore();
 
   React.useEffect(() => {
     if (userId) fetchData(userId?.userId);
@@ -41,11 +38,13 @@ export function InfoBox(props: IInfoBoxProps) {
           </span>
         </div>
       </div>
-      <img
-        src={getInfoStorage(maxScore?.order ?? 6).icon}
-        alt=""
-        className="size-10 "
-      />
+      {loading ? null : (
+        <img
+          src={getInfoStorage(maxScore?.order ?? 6).icon}
+          alt=""
+          className="size-10 "
+        />
+      )}
     </div>
   );
 }

@@ -14,14 +14,12 @@ const useClaimHandler = () => {
   } = useCountDownStore();
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  console.log(countdown, isButtonDisabled);
 
   const { userInfo, claim } = useUserInfo();
   const { userId } = useUserId();
 
   const calculateRemainingSeconds = useCallback(
     (lastClaimTime: number) => {
-      console.log("calculateRemainingSeconds");
       if (!userInfo) return 0;
 
       const nowDate = new Date();
@@ -29,7 +27,6 @@ const useClaimHandler = () => {
         lastClaimTime + userInfo.timeLimit * 60 * 1000
       );
       const remainingTime = nextClaimDate.getTime() - nowDate.getTime();
-      console.log(remainingTime);
       return Math.max(Math.floor(remainingTime / 1000), 0);
     },
     [userInfo]
@@ -59,20 +56,17 @@ const useClaimHandler = () => {
   };
 
   useEffect(() => {
-    console.log(userInfo, countdown);
     if (userInfo && userInfo.lastClaimTimestamp) {
       const remainingSeconds = calculateRemainingSeconds(
         userInfo.lastClaimTimestamp
       );
       if (remainingSeconds) startCountdown(remainingSeconds);
-      console.log(remainingSeconds);
     }
   }, [calculateRemainingSeconds, userInfo]);
 
   const startCountdown = (seconds: number) => {
     setIsButtonDisabled(true);
     setCountdown(seconds);
-    console.log("startCountdown", seconds);
   };
 
   useEffect(() => {

@@ -38,21 +38,25 @@ export function ReferralRewardsListTask(props: IReferralRewardsListTaskProps) {
 
   return (
     <div className="w-full flex flex-col items-center gap-2">
-      {referralRewards.map((referralReward) => (
-        <LeaguesReferralTaskItem
-          key={referralReward.title}
-          score={`${referralReward.referralsNeeded} ref`}
-          icon={getInfoInvite(referralReward.referralsNeeded).icon}
-          onClaim={async () => {
-            await handleVerifyTask(userId.userId, referralReward.id);
-          }}
-          progress={Math.round(
-            (userInfo?.referrals.length / referralReward.referralsNeeded) * 100
-          )}
-          reward={referralReward.rewardValue}
-          title={referralReward.title}
-        />
-      ))}
+      {referralRewards
+        .sort((a, b) => (!b.isCompleted ? 1 : -1))
+        .map((referralReward) => (
+          <LeaguesReferralTaskItem
+            key={referralReward.title}
+            score={`${referralReward.referralsNeeded} ref`}
+            icon={getInfoInvite(referralReward.referralsNeeded).icon}
+            onClaim={async () => {
+              await handleVerifyTask(userId.userId, referralReward.id);
+            }}
+            progress={Math.round(
+              (userInfo?.referrals.length / referralReward.referralsNeeded) *
+                100
+            )}
+            reward={referralReward.rewardValue}
+            title={referralReward.title}
+            isCompleted={referralReward.isCompleted}
+          />
+        ))}
     </div>
   );
 }

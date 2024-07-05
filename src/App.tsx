@@ -21,6 +21,7 @@ import RoadMapPage from "components/Page/RoadMapPage";
 import ReferralPage from "components/Page/ReferralPage";
 import InvestingPage from "components/Page/InvestingPage";
 import useClaimHandler from "utils/useClaimHandler";
+import { RanksPage } from "components/Page/RanksPage";
 
 const queryClient = new QueryClient();
 
@@ -89,6 +90,7 @@ function App() {
     Boost: <BoostPage back={handleBack} />,
     Referral: <ReferralPage back={handleBack} />,
     Investing: <InvestingPage back={handleBack} />,
+    Ranks: <RanksPage />,
   };
 
   // const { startCountdown, calculateRemainingSeconds } = useClaimHandler();

@@ -7,7 +7,6 @@ export function Account() {
   const { disconnect } = useDisconnect();
   const { data: ensName } = useEnsName({ address });
   const { data: ensAvatar } = useEnsAvatar({ name: ensName! });
-  console.log(address, ensAvatar, ensName, connector);
 
   return (
     <div className="flex items-center gap-3">

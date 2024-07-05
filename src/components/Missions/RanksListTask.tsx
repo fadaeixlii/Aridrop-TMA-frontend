@@ -40,19 +40,22 @@ export function RanksListTask(props: IRanksListTaskProps) {
 
   return (
     <div className="w-full flex flex-col items-center gap-2">
-      {ranks.map((rank) => (
-        <LeaguesReferralTaskItem
-          key={rank.name}
-          score={formatNumber(rank.maxScore)}
-          icon={getInfoRank(rank.name).icon}
-          onClaim={async () => {
-            await handleVerifyTask(userId.userId, rank.id);
-          }}
-          progress={Math.round((userInfo?.storedScore / rank.maxScore) * 100)}
-          reward={rank.reward}
-          title={rank.name}
-        />
-      ))}
+      {ranks
+        .sort((a, b) => (!b.isCompleted ? 1 : -1))
+        .map((rank) => (
+          <LeaguesReferralTaskItem
+            key={rank.name}
+            score={formatNumber(rank.maxScore)}
+            icon={getInfoRank(rank.name).icon}
+            onClaim={async () => {
+              await handleVerifyTask(userId.userId, rank.id);
+            }}
+            progress={Math.round((userInfo?.storedScore / rank.maxScore) * 100)}
+            reward={rank.reward}
+            title={rank.name}
+            isCompleted={rank.isCompleted}
+          />
+        ))}
     </div>
   );
 }

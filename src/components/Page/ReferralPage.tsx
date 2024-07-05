@@ -25,18 +25,25 @@ const ReferralPage: React.FC<Props> = () => {
 
   return (
     <div className="h-full flex flex-col items-center justify-start mt-4 gap-4 text-white pb-28">
-      <div className=" p-4">
+      <div className=" py-4">
         <TelegramProfileImage
           telegramId={userId?.telegramId.toString() ?? ""}
-          className="size-28"
+          className="size-20"
         />
         <div className="flex items-center gap-3 flex-wrap justify-center my-4">
-          <div className="font-bold text-2xl">
+          <div className="font-bold text-xl">
             {userInfo?.referrals.length} Friend
           </div>
         </div>
-        <div className="text-center font-extralight text-xl  ">
+        <div className="text-center font-extralight text-base  ">
           Every time your friend claims OPA you get 20% cashback
+        </div>
+        <div className="text-center font-extralight text-base  ">
+          Get <span className="text-[#0098EA] font-bold">TON</span> from
+          referrals
+        </div>
+        <div className="text-center font-extralight text-xs  ">
+          (Invite friends when they claim 2 time you will get TON rewards)
         </div>
       </div>
       <div className="grow w-full overflow-scroll flex flex-col gap-2">

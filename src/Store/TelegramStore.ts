@@ -45,6 +45,8 @@ export interface IUser {
   profitPerHour: number;
   rewardFromRank: number;
   lastTimeCallApi: number;
+  claimCount: number;
+  collectedTon: number;
 }
 
 // Define the structure of a User info
@@ -71,6 +73,8 @@ export interface UserInfo {
   completedTasks: string[];
   canClaim: boolean;
   profitPerHour: number;
+  claimCount: number;
+  collectedTon: number;
 }
 
 // Define the structure of the telegram store state

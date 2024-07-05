@@ -42,10 +42,6 @@ const MissionsPage: React.FC<Props> = ({ back }) => {
           <span>{formatCurrency(userInfo.storedScore)}</span>
           <img src={OPA} alt="" className="size-8" />
         </div>
-        <span className="flex items-center gap-2 text-slate-400 text-lg">
-          <span>{userRank.key}</span>
-          <PiArrowRight onClick={() => {}} />
-        </span>
       </div>
       <div className="grow w-full overflow-scroll flex flex-col gap-2">
         <Tabs defaultValue="special" className="">
@@ -58,7 +54,7 @@ const MissionsPage: React.FC<Props> = ({ back }) => {
             {tasks ? (
               !loadingTask ? (
                 tasks
-                  .filter((task) => !task.isCompleted)
+                  .sort((a, b) => (!b.isCompleted ? 1 : -1))
                   .map((task, index) => <TaskItem task={task} key={index} />)
               ) : (
                 <BounceLoading />

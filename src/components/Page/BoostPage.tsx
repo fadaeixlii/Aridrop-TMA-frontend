@@ -17,8 +17,16 @@ const BoostPage: React.FC<BoostPageProps> = () => {
   const { userInfo } = useUserInfo();
   const { userId } = useUserId();
 
-  const { fetchData: fetchDataMaxScore, maxScore } = useMaxScoreBoostStore();
-  const { fetchData: fetchDataTimeLimit, timeLimit } = useTimeLimitBoostStore();
+  const {
+    fetchData: fetchDataMaxScore,
+    maxScore,
+    loading: maxScoreLoading,
+  } = useMaxScoreBoostStore();
+  const {
+    fetchData: fetchDataTimeLimit,
+    timeLimit,
+    loading: timeLimitLoading,
+  } = useTimeLimitBoostStore();
 
   useEffect(() => {
     if (userId) {
@@ -62,6 +70,7 @@ const BoostPage: React.FC<BoostPageProps> = () => {
           title="Opal Stone"
           nextLevel={maxScore?.order}
           nextPrice={maxScore?.price}
+          loading={maxScoreLoading}
         />
         <BoostItem
           desc="Decrease time to fill"
@@ -73,6 +82,7 @@ const BoostPage: React.FC<BoostPageProps> = () => {
           title="Lightning speed"
           nextLevel={timeLimit?.order}
           nextPrice={timeLimit?.price}
+          loading={timeLimitLoading}
         />
       </div>
       <div className=" p-4 flex flex-col items-center justify-center gap-2 px-4 w-full mt-5">

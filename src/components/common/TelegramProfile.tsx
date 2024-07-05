@@ -33,7 +33,7 @@ const TelegramProfileImage: React.FC<TelegramProfileImageProps> = ({
 
   if (loading) {
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center shrink-0">
         <img src={User} className={twMerge("size-10", className)} />
       </div>
     );
@@ -41,14 +41,14 @@ const TelegramProfileImage: React.FC<TelegramProfileImageProps> = ({
 
   if (error) {
     return (
-      <div className="flex justify-center">
+      <div className="flex justify-center shrink-0">
         <img src={User} className={twMerge("size-10", className)} />
       </div>
     );
   }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center shrink-0">
       {profileImageUrl ? (
         <img
           src={profileImageUrl}

@@ -7,17 +7,18 @@ export interface IBoostItemProps {
   nextPrice?: number;
   nextLevel?: number;
   onClick: () => void;
+  loading: boolean;
 }
 
 export function BoostItem(props: IBoostItemProps) {
-  const { icon, onClick, title, nextLevel, nextPrice, desc } = props;
+  const { icon, onClick, title, nextLevel, nextPrice, desc, loading } = props;
 
   return (
     <div
       className="flex items-center gap-4 newBox px-4 py-2 text-white w-full "
       onClick={onClick}
     >
-      <img src={icon} alt="" className="size-8 shrink-0" />
+      {loading ? null : <img src={icon} alt="" className="size-8 shrink-0" />}
       <div className="flex flex-col grow w-full gap-1 ">
         <div className="flex items-center w-full justify-between">
           <div className="flex flex-col ">

@@ -68,13 +68,14 @@ const ClaimBox: React.FC<ClaimBoxProps> = ({ setActiveTab }) => {
           className="aspect-square w-[50%] shrink "
         />
 
-        <span className="flex items-center gap-2 text-slate-400 text-lg">
+        <span
+          className="flex items-center gap-2 text-slate-400 text-lg"
+          onClick={() => {
+            setActiveTab("Ranks");
+          }}
+        >
           <span>{userRank.key}</span>
-          <PiArrowRight
-            onClick={() => {
-              // setActiveTab("Ranks");
-            }}
-          />
+          <PiArrowRight />
         </span>
       </div>
 
